@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/chien')]
 final class ChienController extends AbstractController
 {
-    #[Route(name: 'app_chien_index', methods: ['GET'])]
+    #[Route('/', name: 'app_chien_index', methods: ['GET'])]
     public function index(ChienRepository $chienRepository): Response
     {
         return $this->render('chien/index.html.twig', [
@@ -71,7 +71,7 @@ final class ChienController extends AbstractController
     #[Route('/{id}', name: 'app_chien_delete', methods: ['POST'])]
     public function delete(Request $request, Chien $chien, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$chien->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $chien->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($chien);
             $entityManager->flush();
         }
