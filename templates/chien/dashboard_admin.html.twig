@@ -1,0 +1,540 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Admin{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<nav>
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
+  <div class="nav-right">
+    <div class="nav-links">
+      <a class="page-nav-link" href="#fiche">Deconnexion</a>
+    </div>
+    <div class="nav-user">
+      <div class="nav-avatar">AD</div>
+    </div>
+  </div>
+</nav>
+
+<!-- Onglets de navigation -->
+<div class="page-nav">
+<a class="page-nav-link" href="{{ path('app_chien_index') }}">Accueil</a>
+  <a class="page-nav-link active" href="#espace">Mon espace</a>
+  <a class="page-nav-link" href="#catalogue">Gérer les clients</a>
+  <a class="page-nav-link" href="#catalogue">Gérer les chiens</a>
+  <a class="page-nav-link" href="#fiche">Gérer les cours</a>
+  
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 1 — MON ESPACE PROPRIÉTAIRE
+══════════════════════════════════════ -->
+<section class="espace-section" id="espace">
+  <div class="section-inner">
+    <p class="section-label">Espace admin</p>
+    <h2 class="section-title">Mon <em>espace</em> administrateur</h2>
+
+    <div class="espace-grid">
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-user">
+          <div class="avatar">AD</div>
+          <div>
+            <div class="sidebar-name">Admin</div>
+            <div class="sidebar-role">Administrateur</div>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <div class="sidebar-section-label">Mon espace</div>
+          <a class="sidebar-link active" href="#">
+            <span class="icon"></span> Tableau de bord
+          </a>
+          <a class="sidebar-link" href="#">
+            <span class="icon"></span>Les chiens
+          </a>
+          <a class="sidebar-link" href="#">
+            <span class="icon"></span>Mes réservations
+          </a>
+          <a class="sidebar-link" href="#">
+            <span class="icon"></span>Cours disponibles
+          </a>
+          <div class="sidebar-section-label">Compte</div>
+          <a class="sidebar-link" href="#">
+            <span class="icon"></span>Mon profil
+          </a>
+          <a class="sidebar-link" href="#">
+            <span class="icon"></span> Déconnexion
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Contenu principal -->
+      <div class="dash-main">
+
+        <!-- Bienvenue -->
+        <div class="dash-welcome">
+          <div>
+            <h2>Bonjour Thomas 👋</h2>
+            <p>Vous avez 2 séances cette semaine · Rocky progresse bien !</p>
+          </div>
+          <a href="#catalogue" class="btn btn-amber">Réserver un cours</a>
+        </div>
+
+        <!-- Mes chiens -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem">
+            <h3 style="font-family:var(--display);font-size:1rem;font-weight:500;color:var(--ink)">Mes chiens</h3>
+            <a href="#" class="btn btn-ghost btn-sm">+ Ajouter un chien</a>
+          </div>
+          <div class="chiens-row">
+            <div class="chien-card">
+              <div class="chien-card-top">
+                <div class="chien-icon green">🐕</div>
+                <div>
+                  <div class="chien-name">Rocky</div>
+                  <div class="chien-breed">Berger Australien · 3 ans</div>
+                </div>
+              </div>
+              <div class="chien-stats">
+                <div class="chien-stat">
+                  <div class="chien-stat-val">3</div>
+                  <div class="chien-stat-label">Cours</div>
+                </div>
+                <div class="chien-stat">
+                  <div class="chien-stat-val">80%</div>
+                  <div class="chien-stat-label">Progrès</div>
+                </div>
+                <div class="chien-stat">
+                  <div class="chien-stat-val">2</div>
+                  <div class="chien-stat-label">À venir</div>
+                </div>
+              </div>
+              <div class="chien-card-footer">
+                <a href="#fiche" class="btn btn-outline btn-sm" style="flex:1;justify-content:center">Voir fiche</a>
+                <a href="#catalogue" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Inscrire</a>
+              </div>
+            </div>
+
+            <div class="chien-card">
+              <div class="chien-card-top">
+                <div class="chien-icon amber">🐩</div>
+                <div>
+                  <div class="chien-name">Luna</div>
+                  <div class="chien-breed">Caniche · 1 an</div>
+                </div>
+              </div>
+              <div class="chien-stats">
+                <div class="chien-stat">
+                  <div class="chien-stat-val">1</div>
+                  <div class="chien-stat-label">Cours</div>
+                </div>
+                <div class="chien-stat">
+                  <div class="chien-stat-val">30%</div>
+                  <div class="chien-stat-label">Progrès</div>
+                </div>
+                <div class="chien-stat">
+                  <div class="chien-stat-val">1</div>
+                  <div class="chien-stat-label">À venir</div>
+                </div>
+              </div>
+              <div class="chien-card-footer">
+                <a href="#" class="btn btn-outline btn-sm" style="flex:1;justify-content:center">Voir fiche</a>
+                <a href="#catalogue" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Inscrire</a>
+              </div>
+            </div>
+
+            <!-- Ajouter -->
+            <div class="chien-card" style="border:2px dashed var(--sand-3);align-items:center;justify-content:center;min-height:180px;cursor:pointer;background:transparent">
+              <div style="text-align:center;color:var(--ink-3)">
+                <div style="font-size:2rem;margin-bottom:0.5rem">＋</div>
+                <div style="font-size:0.85rem;font-weight:500">Ajouter un chien</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prochaines séances -->
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem">
+            <h3 style="font-family:var(--display);font-size:1rem;font-weight:500;color:var(--ink)">Prochaines séances</h3>
+            <a href="#" class="btn btn-ghost btn-sm">Voir tout</a>
+          </div>
+          <div class="seances-list">
+            <div class="seance-item">
+              <div class="seance-date">
+                <div class="seance-date-day">12</div>
+                <div class="seance-date-month">Mars</div>
+              </div>
+              <div class="seance-info">
+                <div class="seance-title">Agility niveau 1</div>
+                <div class="seance-meta">14h00 – 15h30 · Julien Dupont · Terrain B</div>
+              </div>
+              <div class="seance-chien">🐕 Rocky</div>
+              <span class="tag tag-blue">À venir</span>
+            </div>
+            <div class="seance-item">
+              <div class="seance-date">
+                <div class="seance-date-day">14</div>
+                <div class="seance-date-month">Mars</div>
+              </div>
+              <div class="seance-info">
+                <div class="seance-title">Obéissance débutant</div>
+                <div class="seance-meta">10h00 – 11h00 · Sophie Martin · Salle 1</div>
+              </div>
+              <div class="seance-chien">🐩 Luna</div>
+              <span class="tag tag-blue">À venir</span>
+            </div>
+            <div class="seance-item" style="opacity:0.6">
+              <div class="seance-date" style="background:var(--sand-3)">
+                <div class="seance-date-day" style="color:var(--ink-2)">5</div>
+                <div class="seance-date-month" style="color:var(--ink-3)">Mars</div>
+              </div>
+              <div class="seance-info">
+                <div class="seance-title">Socialisation</div>
+                <div class="seance-meta">17h30 – 19h00 · Emma Petit · Terrain A</div>
+              </div>
+              <div class="seance-chien">🐕 Rocky</div>
+              <span class="tag tag-green">Terminé</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PAGE 2 — CATALOGUE DES COURS
+══════════════════════════════════════ -->
+<section class="catalogue-section" id="catalogue">
+  <div class="section-inner">
+    <p class="section-label">Catalogue</p>
+    <h2 class="section-title">Cours <em>disponibles</em></h2>
+    <p class="section-sub">Trouvez le cours adapté à votre chien et réservez en ligne.</p>
+
+    <div class="filtres">
+      <button class="filtre-btn active">Tous</button>
+      <button class="filtre-btn">Débutant</button>
+      <button class="filtre-btn">Intermédiaire</button>
+      <button class="filtre-btn">Avancé</button>
+      <button class="filtre-btn">Socialisation</button>
+      <div class="search-wrap">
+        🔍 <input type="text" placeholder="Rechercher un cours…">
+      </div>
+    </div>
+
+    <div class="cours-grid">
+
+      <div class="cours-card">
+        <div class="cours-img green">🎓
+          <span class="cours-badge new">Nouveau</span>
+        </div>
+        <div class="cours-body">
+          <span class="cours-level">Débutant</span>
+          <h3 class="cours-title">Obéissance de base</h3>
+          <p class="cours-desc">Assis, couché, reste, rappel. Idéal pour les jeunes chiens de moins de 2 ans.</p>
+          <div class="cours-meta">
+            <span>📅 Lun & Mer 10h</span>
+            <span>👥 6 / 8 places</span>
+            <span>⏱ 1h</span>
+            <span>🎓 Sophie Martin</span>
+          </div>
+          <div class="cours-footer">
+            <div class="cours-price">45€ <small>/ séance</small></div>
+            <button class="btn-reserver">Réserver →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cours-card">
+        <div class="cours-img amber">🏆
+          <span class="cours-badge full">Complet</span>
+        </div>
+        <div class="cours-body">
+          <span class="cours-level">Intermédiaire</span>
+          <h3 class="cours-title">Agility niveau 2</h3>
+          <p class="cours-desc">Parcours d'obstacles, sauts, tunnels. Renforce la complicité chien-maître.</p>
+          <div class="cours-meta">
+            <span>📅 Sam 9h–11h</span>
+            <span>👥 8 / 8 places</span>
+            <span>⏱ 2h</span>
+            <span>🎓 Julien Dupont</span>
+          </div>
+          <div class="cours-footer">
+            <div class="cours-price">60€ <small>/ séance</small></div>
+            <button class="btn-reserver full" disabled>Complet</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cours-card">
+        <div class="cours-img blue">🤝</div>
+        <div class="cours-body">
+          <span class="cours-level">Tous niveaux</span>
+          <h3 class="cours-title">Socialisation</h3>
+          <p class="cours-desc">Interactions contrôlées entre chiens. Développement de la confiance sociale.</p>
+          <div class="cours-meta">
+            <span>📅 Jeu 14h</span>
+            <span>👥 4 / 10 places</span>
+            <span>⏱ 1h30</span>
+            <span>🎓 Emma Petit</span>
+          </div>
+          <div class="cours-footer">
+            <div class="cours-price">38€ <small>/ séance</small></div>
+            <button class="btn-reserver">Réserver →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cours-card">
+        <div class="cours-img pink">🦮</div>
+        <div class="cours-body">
+          <span class="cours-level">Avancé</span>
+          <h3 class="cours-title">Rappel avancé</h3>
+          <p class="cours-desc">Maîtrise du rappel en toutes circonstances, même avec distractions.</p>
+          <div class="cours-meta">
+            <span>📅 Mar 16h</span>
+            <span>👥 3 / 6 places</span>
+            <span>⏱ 1h</span>
+            <span>🎓 Sophie Martin</span>
+          </div>
+          <div class="cours-footer">
+            <div class="cours-price">50€ <small>/ séance</small></div>
+            <button class="btn-reserver">Réserver →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PAGE 3 — FICHE CHIEN (vue proprio)
+══════════════════════════════════════ -->
+<section class="fiche-section" id="fiche">
+  <div class="section-inner">
+    <p class="section-label">Mon chien</p>
+    <h2 class="section-title">Fiche de <em>Rocky</em></h2>
+
+    <div class="fiche-grid">
+
+      <div>
+        <div class="fiche-card" style="margin-bottom:1rem">
+          <div class="fiche-top">
+            <span class="fiche-animal">🐕</span>
+            <div class="fiche-name">Rocky</div>
+            <div class="fiche-breed">Berger Australien · Mâle · 3 ans</div>
+          </div>
+          <div class="fiche-body">
+            <div class="fiche-info">
+              <div class="fiche-row">
+                <span class="fiche-label">Race</span>
+                <span class="fiche-value">Berger Australien</span>
+              </div>
+              <div class="fiche-row">
+                <span class="fiche-label">Âge</span>
+                <span class="fiche-value">3 ans</span>
+              </div>
+              <div class="fiche-row">
+                <span class="fiche-label">Sexe</span>
+                <span class="fiche-value">Mâle castré</span>
+              </div>
+              <div class="fiche-row">
+                <span class="fiche-label">Inscrit depuis</span>
+                <span class="fiche-value">Janvier 2025</span>
+              </div>
+              <div class="fiche-row">
+                <span class="fiche-label">Niveau actuel</span>
+                <span class="tag tag-blue">Intermédiaire</span>
+              </div>
+            </div>
+          </div>
+          <div class="fiche-actions">
+            <a href="#" class="btn btn-outline btn-sm" style="flex:1;justify-content:center">Modifier</a>
+            <a href="#catalogue" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Inscrire à un cours</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="fiche-right">
+
+        <!-- Progression -->
+        <div class="content-card">
+          <div class="content-card-title">📈 Progression</div>
+          <div class="progress-list">
+            <div class="progress-item">
+              <div class="progress-header"><span>Obéissance</span><span>80%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-header"><span>Socialisation</span><span>65%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-header"><span>Agility</span><span>40%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-header"><span>Rappel</span><span>55%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes de l'éducateur -->
+        <div class="content-card">
+          <div class="content-card-title">📝 Notes de l'éducateur</div>
+          <div class="note-card">
+            <div class="note-meta">Julien Dupont · Agility niveau 1 · 5 mars 2026</div>
+            <div class="note-text">Rocky montre d'excellentes dispositions pour l'agility. Il maîtrise bien les sauts et le tunnel. Travailler davantage le slalom pour la prochaine séance.</div>
+          </div>
+          <div class="note-card">
+            <div class="note-meta">Sophie Martin · Obéissance · 20 fév. 2026</div>
+            <div class="note-text">Très bon comportement en groupe. Le rappel est maintenant fiable en environnement calme. Continuer les exercices à la maison.</div>
+          </div>
+        </div>
+
+        <!-- Inscriptions -->
+        <div class="content-card">
+          <div class="content-card-title">📚 Historique des cours</div>
+          <div class="inscriptions-list">
+            <div class="inscription-item">
+              <div>
+                <div class="inscription-name">Obéissance de base</div>
+                <div class="inscription-meta">Jan – Mars 2025 · Sophie Martin</div>
+              </div>
+              <span class="tag tag-green">Terminé</span>
+            </div>
+            <div class="inscription-item">
+              <div>
+                <div class="inscription-name">Socialisation</div>
+                <div class="inscription-meta">Avr – Juin 2025 · Emma Petit</div>
+              </div>
+              <span class="tag tag-green">Terminé</span>
+            </div>
+            <div class="inscription-item">
+              <div>
+                <div class="inscription-name">Agility niveau 1</div>
+                <div class="inscription-meta">Fév – Avr 2026 · Julien Dupont</div>
+              </div>
+              <span class="tag tag-blue">En cours</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PAGE 4 — FORMULAIRE D'INSCRIPTION
+══════════════════════════════════════ -->
+<section class="inscription-section" id="inscription">
+  <div class="section-inner">
+    <p class="section-label">Réservation</p>
+    <h2 class="section-title">S'inscrire à un <em>cours</em></h2>
+
+    <div class="inscription-layout">
+
+      <!-- Détail du cours -->
+      <div>
+        <div class="cours-detail-card">
+          <div class="cours-detail-img">🎓</div>
+          <div class="cours-detail-body">
+            <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem">
+              <span class="tag tag-forest">Débutant</span>
+              <span class="tag tag-green">● 2 places restantes</span>
+            </div>
+            <div class="cours-detail-title">Obéissance de base</div>
+            <p class="cours-detail-desc">Apprentissage des ordres fondamentaux : assis, couché, reste, rappel. Ce cours est idéal pour les jeunes chiens ou les chiens sans formation préalable. Les séances alternent exercices individuels et travail en groupe.</p>
+
+            <div class="detail-grid">
+              <div class="detail-item">
+                <div class="detail-item-label">Jours</div>
+                <div class="detail-item-value">Lun & Mercredi</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-item-label">Horaire</div>
+                <div class="detail-item-value">10h00 – 11h00</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-item-label">Niveau</div>
+                <div class="detail-item-value">Débutant</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-item-label">Lieu</div>
+                <div class="detail-item-value">Salle 1</div>
+              </div>
+            </div>
+
+            <div class="educateur-row">
+              <div class="educateur-avatar">SM</div>
+              <div>
+                <div class="educateur-name">Sophie Martin</div>
+                <div class="educateur-role">Éducatrice canine certifiée · 8 ans d'expérience</div>
+              </div>
+            </div>
+
+            <div class="places-bar">
+              <div class="places-header">
+                <span>Places disponibles</span>
+                <strong>6 / 8 inscrits</strong>
+              </div>
+              <div class="places-track">
+                <div class="places-fill" style="width:75%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="form-card">
+        <div class="form-title">Réserver une place</div>
+        <div class="form-subtitle">Sélectionnez votre chien et confirmez l'inscription.</div>
+
+        <div class="form-group">
+          <label>Chien à inscrire</label>
+          <select>
+            <option>🐕 Rocky — Berger Australien</option>
+            <option>🐩 Luna — Caniche</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Date de début souhaitée</label>
+          <input type="text" value="Lundi 17 mars 2026">
+        </div>
+
+        <div class="form-group">
+          <label>Message pour l'éducateur (optionnel)</label>
+          <input type="text" placeholder="Ex : Rocky est timide avec les autres chiens…">
+        </div>
+
+        <div class="form-price">
+          <span class="form-price-label">Prix par séance</span>
+          <span class="form-price-val">45 €</span>
+        </div>
+
+        <button class="btn btn-primary btn-full">Confirmer l'inscription →</button>
+        <p class="form-note">Vous pouvez annuler jusqu'à 48h avant la séance.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
+</footer>
+
+{% endblock %}
+
+    

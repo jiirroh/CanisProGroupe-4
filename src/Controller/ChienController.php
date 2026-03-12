@@ -21,6 +21,11 @@ final class ChienController extends AbstractController
             'chiens' => $chienRepository->findAll(),
         ]);
     }
+    #[Route('/dashboard', name: 'app_chien_dashboard', methods: ['GET'])]
+    public function dashboard(): Response
+    {
+        return $this->render('chien/dashboard_admin.html.twig');
+    }
 
     #[Route('/liste', name: 'app_chien_liste', methods: ['GET'])]
     public function liste(ChienRepository $chienRepository): Response

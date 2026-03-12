@@ -12,7 +12,7 @@
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
   <div class="nav-links">
     <a href="#cours">Cours</a>
-    <a href="#dashboard">Dashboard</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
     <a href="#profil" class="nav-cta">S'inscrire</a>
     <a href="#" class="nav-cta">Connexion</a>
   </div>
@@ -21,8 +21,7 @@
 <div class="page-nav">
   <a class="page-nav-link active" href="#hero">Accueil</a>
   <a class="page-nav-link" href="#cours">Cours</a>
-  <a class="page-nav-link" href="#dashboard">Dashboard</a>
-  <a class="page-nav-link" href="#profil">Profil chien</a>
+  <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
 </div>
 
 
@@ -49,6 +48,10 @@
           <div class="stat-num">96%</div>
           <div class="stat-label">Satisfaction</div>
         </div>
+        <div>
+          <div class="stat-num">35 ans</div>
+          <div class="stat-label">Expérience</div>
+        </div>
       </div>
     </div>
     <div class="hero-visual">
@@ -71,6 +74,46 @@
   </div>
 </section>
 
+<section class="why-section" id="why">
+  <div class="section-inner">
+    <p class="section-label">Nos engagements</p>
+    <h2 class="section-title">Pourquoi choisir <em>CanisPro ?</em></h2>
+    <p class="section-sub">Une approche bienveillante, des éducateurs certifiés et un suivi personnalisé pour chaque chien.</p>
+ 
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon green"><img src="{{ asset('images/prof.png') }}" width="36" height="36"></div>
+        <h3>Éducateurs certifiés</h3>
+        <p>Tous nos éducateurs sont titulaires du ACACED et d'une certification en éducation canine positive.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon amber"><img src="{{ asset('images/approbation.png') }}" width="36" height="36"></div>
+        <h3>Méthodes positives</h3>
+        <p>Nous n'utilisons que des méthodes de renforcement positif, sans contrainte ni punition.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon blue"><img src="{{ asset('images/statistique.png') }}" width="36" height="36"></div>
+        <h3>Suivi personnalisé</h3>
+        <p>Suivez la progression de votre chien en temps réel avec les notes de l'éducateur après chaque séance.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon pink"><img src="{{ asset('images/chien.png') }}" width="36" height="36"></div>
+        <h3>Petits groupes</h3>
+        <p>Maximum 8 chiens par cours pour garantir une attention individuelle et une progression optimale.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon teal"><img src="{{ asset('images/calendrier.png') }}" width="36" height="36"></div>
+        <h3>Réservation en ligne</h3>
+        <p>Réservez et gérez vos séances 24h/24 depuis votre espace propriétaire.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon purple">💬</div>
+        <h3>Échanges facilités</h3>
+        <p>Communiquez directement avec votre éducateur via la messagerie intégrée à votre espace.</p>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- ──────────────────────────────────────
      PAGE 2 — LISTE DES COURS
 ─────────────────────────────────────── -->
