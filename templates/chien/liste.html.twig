@@ -6,6 +6,16 @@
 {% block title %}Administration Chien{% endblock %}
 
 {% block body %}
+
+<nav>
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
+  <div class="nav-links">
+    <a href="#cours">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="#profil" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">Connexion</a>
+  </div>
+</nav>
 <div class="admin-container">
     <div class="admin-header">
         <h1>Gestion</h1>
@@ -39,4 +49,7 @@
         </table>
     </div>
 </div>
+<footer>
+  <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
+</footer>
 {% endblock %}
