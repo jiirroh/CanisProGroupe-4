@@ -22,11 +22,12 @@ final class ChienController extends AbstractController
         ]);
     }
 
-    #[Route('/liste', name: 'app_chien_liste', methods: ['GET'])]
-    public function liste(ChienRepository $chienRepository): Response
+    #[Route('/liste', name: 'app_chien_liste')]
+    public function chien(ChienRepository $chienRepository): Response
     {
+        $chiens = $chienRepository->findAll();
         return $this->render('chien/liste.html.twig', [
-            'chiens' => $chienRepository->findAll(),
+            'chiens' => $chiens,
         ]);
     }
 

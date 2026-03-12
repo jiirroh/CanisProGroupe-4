@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration Chien{% endblock %}
+
+{% block body %}
+<style>
+    /* Design Global */
+    body {
+        background-color: #f0f2f5;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .admin-container {
+        padding: 40px 20px;
+        max-width: 1300px;
+        margin: 0 auto;
+    }
+
+    /* En-tête */
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    h1 {
+        font-weight: 800;
+        color: #1a1f36;
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    /* Table Card */
+    .table-wrapper {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        border: 1px solid #e3e8ee;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+    }
+
+    th {
+        background-color: #f8fafc;
+        color: #64748b;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        padding: 18px;
+        border-bottom: 2px solid #edf2f7;
+        text-align: left;
+    }
+
+    td {
+        padding: 16px;
+        border-bottom: 1px solid #f1f5f9;
+        color: #475569;
+        vertical-align: middle;
+        font-size: 0.95rem;
+    }
+
+    tr:hover {
+        background-color: #fbfcfe;
+    }
+
+    /* Image du produit */
+    .product-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Badges */
+    .badge-category {
+        background: #e0e7ff;
+        color: #4338ca;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .price-text {
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    /* Boutons et Actions */
+    .btn-add {
+        background: #1a1f36;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.2s;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .btn-add:hover {
+        background: #2d3359;
+        transform: translateY(-2px);
+    }
+
+    .actions-group {
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn-modify {
+        background: #edf2f7;
+        color: #2d3748;
+        padding: 8px 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .btn-modify:hover {
+        background: #e2e8f0;
+        color: #1a202c;
+    }
+
+    .btn-delete {
+        background: #fff5f5;
+        color: #c53030;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .btn-delete:hover {
+        background: #feb2b2;
+    }
+</style>
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Gestion </h1>
+        <a href="{{ path('app_chien_liste') }}" class="btn-add">
+            + Ajouter un produit
+        </a>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>race</th>
+                    <th>age</th>
+                    <th>Propriétaire</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chien in chiens %}
+                    <tr>    
+                        <td style="font-weight: 600; color: #1a1f36;">{{ chien.nom }}</td>
+                        <td style="max-width: 300px; color: #64748b; font-size: 0.85rem;">
+                            {{ chien.race|slice(0, 60) }}...
+                        </td>
+                        <td class="age-text">{{ chien.age }} ans</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

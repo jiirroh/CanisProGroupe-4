@@ -22,6 +22,7 @@ class Chien
     #[ORM\Column(length: 20)]
     private ?string $age = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
