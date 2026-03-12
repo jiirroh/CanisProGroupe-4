@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}CanisPro — École de dressage canin{% endblock %}
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
 
 {% block body %}
 
 <nav>
-  <img src="logo-canispro.png" width="170px">
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
   <div class="nav-links">
     <a href="#cours">Cours</a>
     <a href="#dashboard">Dashboard</a>
@@ -15,14 +18,13 @@
   </div>
 </nav>
 
-<!-- Page tabs -->
 <div class="page-nav">
   <a class="page-nav-link active" href="#hero">🏠 Accueil</a>
   <a class="page-nav-link" href="#cours">📚 Cours</a>
   <a class="page-nav-link" href="#dashboard">📊 Dashboard</a>
   <a class="page-nav-link" href="#profil">🐕 Profil chien</a>
-  <1f3e0></1f3e0> Profil chien</a>
 </div>
+
 
 <!-- ──────────────────────────────────────
      PAGE 1 — HERO / LANDING
