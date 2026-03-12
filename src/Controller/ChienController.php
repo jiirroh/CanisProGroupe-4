@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/chien')]
 final class ChienController extends AbstractController
 {
+    
     #[Route(name: 'app_chien_index', methods: ['GET'])]
     public function index(ChienRepository $chienRepository): Response
     {
