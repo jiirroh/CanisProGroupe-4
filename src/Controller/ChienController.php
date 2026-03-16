@@ -36,23 +36,28 @@ final class ChienController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_chien_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    #[Route('/ajouter', name: 'chien_ajouter', methods: ['GET', 'POST'])]
+    public function ajouter(
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
         $chien = new Chien();
-        $form = $this->createForm(ChienType::class, $chien);
+
+        $form = $this->createForm(Chien::class, $chien);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($chien);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_chien_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Chien correctement ajouté !');
+
+            return $this->redirectToRoute('admin');
         }
 
-        return $this->render('chien/new.html.twig', [
-            'chien' => $chien,
-            'form' => $form,
+        return $this->render('new.html.twig', [
+            "chien" => $chien,
+            "form" => $form->createView()
         ]);
     }
 
