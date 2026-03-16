@@ -69,21 +69,34 @@ final class ChienController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_chien_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Chien $chien, EntityManagerInterface $entityManager): Response
-    {
+    #[Route('modifier/{id}', name: 'chien_modification', methods: ['GET', 'POST'])]
+    public function modifier(
+        int $id,
+        Request $request,
+        ChienRepository $chienRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $chien = $chienRepository->find($id);
+        $isModification = $chien !== null;
+        if (!$chien) {
+            throw $this->createNotFoundException('chien non trouvé');
+        }
+
         $form = $this->createForm(ChienType::class, $chien);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($chien);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_chien_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Modification correctement effectuée !');
+
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('chien/edit.html.twig', [
-            'chien' => $chien,
-            'form' => $form,
+            "chien" => $chien,
+            "form" => $form->createView()
         ]);
     }
 
