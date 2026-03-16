@@ -17,6 +17,8 @@ final class ChienController extends AbstractController
     #[Route('/', name: 'app_chien_index', methods: ['GET'])]
     public function index(ChienRepository $chienRepository): Response
     {
+        dd($chienRepository->findAll());
+
         return $this->render('home/index.html.twig', [
             'chiens' => $chienRepository->findAll(),
         ]);
