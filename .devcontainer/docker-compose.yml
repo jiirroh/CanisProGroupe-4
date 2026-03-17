@@ -1,5 +1,6 @@
 version: "3.8"
 
+
 services:
     app:
         build:
@@ -14,6 +15,7 @@ services:
                 condition: service_healthy
         networks:
             - canispro_network
+
 
     db:
         image: mysql:8.0
@@ -36,9 +38,12 @@ services:
             retries: 10
             start_period: 30s
 
+
 volumes:
     database_data:
+
 
 networks:
     canispro_network:
         driver: bridge
+
