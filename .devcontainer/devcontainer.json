@@ -1,8 +1,6 @@
 {
     "name": "CanisPro PHP 8.4 Env",
-    "dockerComposeFile": [
-        "../compose.yaml"
-    ],
+    "dockerComposeFile": "../compose.yaml",
     "service": "web",
     "workspaceFolder": "/var/www/html",
     "customizations": {
@@ -14,7 +12,6 @@
             ]
         }
     },
-    // Commande exécutée UNE SEULE FOIS à la création du Codespace
     "postCreateCommand": "composer install && php bin/console doctrine:migrations:migrate --no-interaction",
     "remoteUser": "root"
 }
