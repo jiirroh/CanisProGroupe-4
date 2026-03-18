@@ -1,20 +1,10 @@
 {
     "name": "CanisPro PHP 8.4 Env",
-    "dockerComposeFile": "../compose.yaml",
-    "service": "web",
-    "workspaceFolder": "/var/www/html",
+    "image": "mcr.microsoft.com/devcontainers/php:8.4",
+    "workspaceFolder": "/workspaces/CanisProGroupe-4",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "bmewburn.vscode-intelephense-client",
-                "nonu.php-extension-pack",
-                "qebis.symfony-vscode"
-            ]
-        }
-    },
-    "postCreateCommand": "composer install && php bin/console doctrine:migrations:migrate --no-interaction",
+    "postCreateCommand": "docker compose up -d && composer install && php bin/console doctrine:migrations:migrate --no-interaction",
     "remoteUser": "root"
 }
