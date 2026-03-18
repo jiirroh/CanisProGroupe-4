@@ -2,7 +2,7 @@
     "name": "CanisPro PHP 8.4 Env",
     "image": "mcr.microsoft.com/devcontainers/php:8.4",
     "workspaceFolder": "/workspaces/CanisProGroupe-4",
-    "postCreateCommand": "apt-get update && apt-get install -y default-mysql-server && service mysql start && mysql -e \"CREATE DATABASE IF NOT EXISTS canispro_bdd; CREATE USER IF NOT EXISTS 'canispro'@'localhost' IDENTIFIED BY 'Trasio2026.'; GRANT ALL ON canispro_bdd.* TO 'canispro'@'localhost';\" && curl -sS https://get.symfony.com/cli/installer | bash && echo 'export PATH=\"$HOME/.symfony5/bin:$PATH\"' >> ~/.bashrc && composer install && php bin/console doctrine:migrations:migrate --no-interaction",
+    "postCreateCommand": "bash .devcontainer/setup.sh",
     "remoteUser": "root",
     "forwardPorts": [8000, 3306],
     "customizations": {
