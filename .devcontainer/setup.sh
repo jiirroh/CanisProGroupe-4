@@ -10,9 +10,11 @@ docker-php-ext-install pdo_mysql
 
 # MySQL
 apt-get update && apt-get install -y default-mysql-server
-mysqld_safe --skip-grant-tables &
-sleep 3
-mysql -e "CREATE DATABASE IF NOT EXISTS canispro_bdd; CREATE USER IF NOT EXISTS 'canispro'@'localhost' IDENTIFIED BY 'Trasio2026.'; GRANT ALL ON canispro_bdd.* TO 'canispro'@'localhost'; FLUSH PRIVILEGES;"
+mariadbd --user=root --skip-networking &
+sleep 5
+mysql -e "CREATE DATABASE IF NOT EXISTS canispro_bdd;"
+mysql -e "CREATE USER IF NOT EXISTS 'canispro'@'localhost' IDENTIFIED BY 'Trasio2026.';"
+mysql -e "GRANT ALL ON canispro_bdd.* TO 'canispro'@'localhost'; FLUSH PRIVILEGES;"
 
 # Composer
 composer install --working-dir=/workspaces/CanisProGroupe-4
