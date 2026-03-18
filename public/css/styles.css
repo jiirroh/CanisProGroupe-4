@@ -41,6 +41,9 @@ html {
     scroll-behavior: smooth;
 }
 body {
+    display : flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: var(--body);
     background: var(--cream);
     color: var(--ink);
@@ -182,6 +185,7 @@ nav {
 ══════════════════════════════════════ */
 section {
     padding: 4rem 2rem;
+    flex: 1;
 }
 .section-inner {
     max-width: 1100px;
@@ -1492,7 +1496,9 @@ footer {
     text-align: center;
     padding: 2rem;
     font-size: 0.82rem;
+    width: 100%; /* S'assure qu'il prend toute la largeur */
 }
+
 footer strong {
     color: var(--sand);
 }
@@ -1692,4 +1698,97 @@ footer strong {
 .td-actions {
     display: flex;
     gap: 0.5rem;
+}
+/* public/css/cours.css */
+.cours-container {
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.cours-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #ece5d6;
+    padding-bottom: 1rem;
+}
+
+.cours-header h1 {
+    font-family: 'Fraunces', serif;
+    color: #2d4a2d;
+}
+
+/* public/css/cours.css */
+.cours-grid {
+    display: grid;
+    /* On force 3 colonnes égales */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Optionnel : Pour que ça reste joli sur mobile (1 colonne) */
+@media (max-width: 900px) {
+    .cours-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+    }
+}
+
+@media (max-width: 600px) {
+    .cours-grid {
+        grid-template-columns: 1fr; /* 1 colonne sur téléphone */
+    }
+}
+
+.cours-card {
+    background: white;
+    border: 1px solid #d9cfbc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.cours-card:hover {
+    transform: translateY(-5px);
+}
+
+.cours-img {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.cours-body {
+    padding: 1.5rem;
+}
+
+.cours-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.badge-debutant { color: #537a53; background: #f5f0e8; }
+.badge-inter { color: #c4783a; background: #fef3e2; }
+
+.cours-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.btn-details {
+    background: #2d4a2d;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.8rem;
 }
