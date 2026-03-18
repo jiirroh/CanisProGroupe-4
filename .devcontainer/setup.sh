@@ -1,4 +1,3 @@
-cat > .devcontainer/setup.sh << 'EOF'
 #!/bin/bash
 set -e
 
@@ -20,5 +19,3 @@ composer install --working-dir=/workspaces/CanisProGroupe-4
 
 # Migrations
 cd /workspaces/CanisProGroupe-4 && php bin/console doctrine:migrations:migrate --no-interaction
-EOF
-chmod +x .devcontainer/setup.sh
