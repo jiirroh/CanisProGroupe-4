@@ -6,6 +6,9 @@ set -e
 curl -sS https://get.symfony.com/cli/installer | bash
 ln -sf /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
+# PHP extension pdo_mysql
+docker-php-ext-install pdo_mysql
+
 # MySQL
 apt-get update && apt-get install -y default-mysql-server
 mysqld_safe --skip-grant-tables &
