@@ -16,4 +16,7 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash && \
 
 RUN a2enmod rewrite
 
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -i 's|/var/www/html|${APACHE_DOCUMENT_ROOT}|g' /etc/apache2/sites-available/000-default.conf
+
 WORKDIR /var/www/html
