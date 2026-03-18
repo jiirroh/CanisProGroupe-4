@@ -3,6 +3,9 @@
     "dockerComposeFile": "../compose.yaml",
     "service": "web",
     "workspaceFolder": "/var/www/html",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
     "customizations": {
         "vscode": {
             "extensions": [
