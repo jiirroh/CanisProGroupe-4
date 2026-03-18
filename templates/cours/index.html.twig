@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Cours{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<nav>
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
+  <div class="nav-links">
+    <a href="#cours">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="#profil" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">Connexion</a>
+  </div>
+</nav>
+
+<div class="page-nav">
+  <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
+  <a class="page-nav-link active" href="{{ path('app_cours') }}">Cours</a>
+  <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+  <a class="page-nav-link" href="{{path('app_chien_liste')}}">Liste des chiens</a>
+</div>
+
+<section class="cours-container">
+    <header class="cours-header">
+        <h1>Catalogue des <em>Cours</em></h1>
+        <p>Choisissez la séance adaptée à votre compagnon.</p>
+    </header>
+
+    <div class="cours-grid">
+        
+        {# Carte 1 - Obéissance #}
+        <article class="cours-card">
+            <div class="cours-img" style="background: linear-gradient(135deg, #e8f5e8, #c8e6c8);">🎓</div>
+            <div class="cours-body">
+                <span class="cours-badge badge-debutant">Débutant</span>
+                <h3>Obéissance de base</h3>
+                <p>Apprentissage du rappel et des ordres simples.</p>
+                <div class="cours-footer">
+                    <strong>45€ <small>/ h</small></strong>
+                    <a href="#" class="btn-details">Voir détails</a>
+                </div>
+            </div>
+        </article>
+
+        {# Carte 2 - Agility #}
+        <article class="cours-card">
+            <div class="cours-img" style="background: linear-gradient(135deg, #fef3e2, #fde0b0);">🏆</div>
+            <div class="cours-body">
+                <span class="cours-badge badge-inter">Intermédiaire</span>
+                <h3>Agility Niveau 1</h3>
+                <p>Parcours d'obstacles et complicité.</p>
+                <div class="cours-footer">
+                    <strong>60€ <small>/ h</small></strong>
+                    <a href="#" class="btn-details">Voir détails</a>
+                </div>
+            </div>
+        </article>
+
+        {# Carte 3 - Socialisation #}
+        <article class="cours-card">
+            <div class="cours-img" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb);">🤝</div>
+            <div class="cours-body">
+                <span class="cours-badge badge-debutant" style="color:#004085; background:#cce5ff;">Tous niveaux</span>
+                <h3>Socialisation</h3>
+                <p>Apprendre à interagir avec d'autres congénères.</p>
+                <div class="cours-footer">
+                    <strong>35€ <small>/ h</small></strong>
+                    <a href="#" class="btn-details">Voir détails</a>
+                </div>
+            </div>
+        </article>
+
+        {# Carte 4 - Rappel #}
+        <article class="cours-card">
+            <div class="cours-img" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0);">🦮</div>
+            <div class="cours-body">
+                <span class="cours-badge badge-inter">Intermédiaire</span>
+                <h3>Rappel à distance</h3>
+                <p>Perfectionner le rappel en liberté totale.</p>
+                <div class="cours-footer">
+                    <strong>50€ <small>/ h</small></strong>
+                    <a href="#" class="btn-details">Voir détails</a>
+                </div>
+            </div>
+        </article>
+
+        {# Carte 5 - Chiots #}
+        <article class="cours-card">
+            <div class="cours-img" style="background: linear-gradient(135deg, #fff3cd, #ffeeba);">🐾</div>
+            <div class="cours-body">
+                <span class="cours-badge badge-debutant" style="color:#856404; background:#fff3cd;">École du chiot</span>
+                <h3>Premiers pas</h3>
+                <p>Éveil et éducation pour chiots de 2 à 6 mois.</p>
+                <div class="cours-footer">
+                    <strong>40€ <small>/ h</small></strong>
+                    <a href="#" class="btn-details">Voir détails</a>
+                </div>
+            </div>
+        </article>
+
+        {# Carte 6 - Avancé #}
+        <article class="cours-card">
+            <div class="cours-img" style="background: linear-gradient(135deg, #d1c4e9, #b39ddb);">🎖️</div>
+            <div class="cours-body">
+                <span class="cours-badge badge-inter" style="color:#4527a0; background:#ede7f6;">Avancé</span>
+                <h3>Obéissance Expert</h3>
+                <p>Marche au pied sans laisse et ordres complexes.</p>
+                <div class="cours-footer">
+                    <strong>65€ <small>/ h</small></strong>
+                    <a href="#" class="btn-details">Voir détails</a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<footer>
+    <strong>CanisPro</strong> — Maquette Symfony · Projet école · 2026
+</footer>
+{% endblock %}

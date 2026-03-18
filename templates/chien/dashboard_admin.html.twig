@@ -11,24 +11,19 @@
 
 <nav>
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
-  <div class="nav-right">
-    <div class="nav-links">
-      <a class="page-nav-link" href="#fiche">Deconnexion</a>
-    </div>
-    <div class="nav-user">
-      <div class="nav-avatar">AD</div>
-    </div>
+  <div class="nav-links">
+    <a href="#cours">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="#profil" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">Connexion</a>
   </div>
 </nav>
 
-<!-- Onglets de navigation -->
 <div class="page-nav">
-<a class="page-nav-link" href="{{ path('app_chien_index') }}">Accueil</a>
-  <a class="page-nav-link active" href="#espace">Mon espace</a>
-  <a class="page-nav-link" href="{{ path('app_chien_liste') }}">Gérer les chiens</a>
-  <a class="page-nav-link" href="#catalogue">Gérer les clients</a>
-  <a class="page-nav-link" href="#fiche">Gérer les cours</a>
-  
+  <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
+  <a class="page-nav-link" href="{{ path('app_cours') }}">Cours</a>
+  <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+  <a class="page-nav-link" href="{{path('app_chien_liste')}}">Liste des chiens</a>
 </div>
 
 <!-- ══════════════════════════════════════
