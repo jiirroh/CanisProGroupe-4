@@ -8,23 +8,21 @@
 
 {% block body %}
 
-<nav class="main-navbar">
-    <a href="{{ path('app_home') }}" class="nav-logo">
-        <img src="{{ asset('images/logo-canispro.png') }}" alt="CanisPro">
-    </a>
-
-    <div class="nav-menu">
-        <a href="{{ path('app_home') }}" class="nav-link">Accueil</a>
-        <a href="{{ path('app_cours') }}" class="nav-link active">Cours</a>
-        <a href="{{ path('app_chien_dashboard') }}" class="nav-link">Dashboard</a>
-        <a href="{{ path('app_chien_liste') }}" class="nav-link">Nos Chiens</a>
-    </div>
-
-    <div class="nav-actions">
-        <a href="#" class="btn-login">Connexion</a>
-        <a href="#profil" class="btn-register">S'inscrire</a>
-    </div>
+<nav>
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
+  <div class="nav-links">
+    <a href="#cours">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="#profil" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">Connexion</a>
+  </div>
 </nav>
+
+<div class="page-nav">
+  <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
+  <a class="page-nav-link" href="{{ path('app_cours') }}">Cours</a>
+  <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+</div>
 
 
 <!-- ──────────────────────────────────────

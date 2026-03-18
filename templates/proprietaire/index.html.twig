@@ -15,11 +15,20 @@
     <a href="#" class="nav-cta">Connexion</a>
   </div>
 </nav>
+
+<div class="page-nav">
+  <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
+  <a class="page-nav-link" href="{{ path('app_cours') }}">Cours</a>
+  <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+  <a class="page-nav-link" href="{{path('app_chien_liste')}}">Liste des chiens</a>
+  <a class="page-nav-link" href="{{path('app_proprietaire_index')}}">Liste des propriétaires</a>
+
+</div>
 <div class="admin-container">
     <div class="admin-header">
         <h1>Gestion des clients</h1>
         <a href="{{ path('app_proprietaire_new') }}" class="btn-add">
-            + Ajouter un clients
+            + Ajouter un client
         </a>
     </div>
     <h1>Liste des propriétaires</h1>
@@ -53,4 +62,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <footer>
+  <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
+</footer>
 {% endblock %}
