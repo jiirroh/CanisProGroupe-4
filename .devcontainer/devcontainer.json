@@ -1,19 +1,20 @@
 {
-  "name": "Symfony Project",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "sensiolabs.symfony-vscode-extension",
-        "bmewburn.vscode-inteliphense-client",
-        "mehdichabane.symfony-snippets"
-      ]
-    }
-  },
-  "remoteUser": "vscode"
+    "name": "CanisPro PHP 8.4 Env",
+    "dockerComposeFile": [
+        "../compose.yaml"
+    ],
+    "service": "web",
+    "workspaceFolder": "/var/www/html",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "nonu.php-extension-pack",
+                "qebis.symfony-vscode"
+            ]
+        }
+    },
+    // Commande exécutée UNE SEULE FOIS à la création du Codespace
+    "postCreateCommand": "composer install && php bin/console doctrine:migrations:migrate --no-interaction",
+    "remoteUser": "root"
 }
