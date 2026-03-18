@@ -7,4 +7,5 @@
 /public/bundles/
 /var/
 /vendor/
+/adminer.php
 ###< symfony/framework-bundle ###
