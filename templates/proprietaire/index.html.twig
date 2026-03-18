@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Proprietaire index{% endblock %}
+
+{% block body %}
+<nav>
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
+  <div class="nav-links">
+    <a href="#cours">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="#profil" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">Connexion</a>
+  </div>
+</nav>
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Gestion des clients</h1>
+        <a href="{{ path('app_proprietaire_new') }}" class="btn-add">
+            + Ajouter un clients
+        </a>
+    </div>
+    <h1>Liste des propriétaires</h1>
+
+    <table class="table-wrapper">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for proprietaire in proprietaires %}
+            <tr>
+                <td>{{ proprietaire.nom }}</td>
+                <td>{{ proprietaire.prenom }}</td>
+                <td class="td-actions"><a href="{{ path('app_proprietaire_edit', {'id': proprietaire.id}) }}" class="btn-add"> modifier</a>  
+               <form method="POST" action="{{ path('app_proprietaire_delete', {'id': proprietaire.id}) }}"
+                                      onsubmit="return confirm('Supprimer définitivement ce proprietaire ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ proprietaire.id) }}">
+                                    <button type="submit" class="btn-delete">Supprimer</button>
+                                </form>
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
