@@ -2,7 +2,8 @@
     "name": "CanisPro PHP 8.4 Env",
     "image": "mcr.microsoft.com/devcontainers/php:8.4",
     "workspaceFolder": "/workspaces/CanisProGroupe-4",
-    "postCreateCommand": "bash .devcontainer/setup.sh",
+    "onCreateCommand": "bash .devcontainer/setup.sh",
+    "postStartCommand": "mysqld_safe --skip-grant-tables & sleep 2",
     "remoteUser": "root",
     "forwardPorts": [8000, 3306],
     "customizations": {
