@@ -22,6 +22,10 @@ class Chien
     #[ORM\Column(length: 20)]
     private ?string $age = null;
 
+    #[ORM\ManyToOne(inversedBy: 'chiens')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Proprietaire $proprietaire = null;
+
 
     public function getId(): ?int
     {
@@ -60,6 +64,18 @@ class Chien
     public function setAge(string $age): static
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getProprietaire(): ?Proprietaire
+    {
+        return $this->proprietaire;
+    }
+
+    public function setProprietaire(?Proprietaire $proprietaire): static
+    {
+        $this->proprietaire = $proprietaire;
 
         return $this;
     }

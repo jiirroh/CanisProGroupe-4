@@ -13,8 +13,13 @@
   <div class="nav-links">
     <a href="{{ path('app_cours') }}">Cours</a>
     <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+<<<<<<< HEAD
     <a href="#" class="nav-cta">S'inscrire</a>
     <a href="#" class="nav-cta">Connexion</a>
+=======
+    <a href="{{ path('app_register') }}" class="nav-cta">S'inscrire</a>
+    <a href="{{ path('app_login') }}" class="nav-cta">Connexion</a>
+>>>>>>> 74dcc02c4579c53b0dfc984a26c6cecfccdb7873
   </div>
 </nav>
 
@@ -45,6 +50,7 @@
                     <th>Nom</th>
                     <th>Race</th>
                     <th>Age</th>
+                    <th>Proprietaire</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -54,6 +60,7 @@
                         <td class="td-nom">{{ chien.nom }}</td>
                         <td class="td-race">{{ chien.race }}</td>
                         <td class="age-text">{{ chien.age }} ans</td>
+                        <td class="td-proprietaire">{{ chien.proprietaire ? chien.proprietaire.nom : 'Aucun' }}</td>
                         <td class="td-actions">
                             <a href="{{ path('chien_modification', {'id': chien.id}) }}" class="btn" style="background: var(--forest-3); color: white; padding: 0.5rem 1rem; font-size: 0.8rem;">
                                 Modifier

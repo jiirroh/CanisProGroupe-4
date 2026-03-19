@@ -13,11 +13,10 @@
   <div class="nav-links">
     <a href="{{ path('app_cours') }}">Cours</a>
     <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
-    <a href="#" class="nav-cta">S'inscrire</a>
-    <a href="#" class="nav-cta">Connexion</a>
+    <a href="{{ path('app_register') }}" class="nav-cta">S'inscrire</a>
+    <a href="{{ path('app_login') }}" class="nav-cta">Connexion</a>
   </div>
 </nav>
-
 <div class="page-nav">
   <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
   <a class="page-nav-link active" href="{{ path('app_cours') }}">Cours</a>

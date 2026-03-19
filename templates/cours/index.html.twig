@@ -12,8 +12,8 @@
   <div class="nav-links">
     <a href="{{ path('app_cours') }}">Cours</a>
     <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
-    <a href="#" class="nav-cta">S'inscrire</a>
-    <a href="#" class="nav-cta">Connexion</a>
+    <a href="{{ path('app_register') }}" class="nav-cta">S'inscrire</a>
+    <a href="{{ path('app_login') }}" class="nav-cta">Connexion</a>
   </div>
 </nav>
 
@@ -25,6 +25,45 @@
   <a class="page-nav-link" href="{{ path('app_proprietaire_index') }}">Liste des propriétaires</a>
   <a class="page-nav-link" href="{{ path('app_cours_index') }}">Gérer les cours</a>
 </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom des cours</th>
+                <th>Niveau</th>
+                <th>Descriptions</th>
+                <th>Prix</th>
+                <th>Date et l'heure</th>
+                <th>Nombre de chiens</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cour in cours %}
+            <tr>
+                <td>{{ cour.libelle }}</td>
+                <td>{{ cour.niveau }}</td>
+                <td>{{ cour.descriptions }}</td>
+                <td>{{ cour.prix }}</td>
+                <td>{{ cour.dateHeure ? cour.dateHeure|date('Y-m-d à H:i:s') : '' }}</td>
+                <td>{{ cour.nbChien }}</td>
+                <td class="td-actions">
+                            <a href="{{ path('chien_modification', {'id': cour.id}) }}" class="btn" style="background: var(--forest-3); color: white; padding: 0.5rem 1rem; font-size: 0.8rem;">
+                                Modifier
+                            </a>
+                            <form method="POST" action="{{ path('app_cours_delete', {'id': cour.id}) }}" onsubmit="return confirm('Supprimer ce chien ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cour.id) }}">
+                                <button type="submit" class="btn-delete">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 <section>
   <div class="section-inner">
