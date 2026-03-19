@@ -25,6 +25,7 @@
 
     <div class="form-symfony">
 
+        <form method="post" action="{{ path('app_login') }}">        
         {% if error %}
             <div style="background:#fdf0f0;color:#e05c5c;border:1px solid #f0c0c0;border-radius:8px;padding:0.85rem 1rem;margin-bottom:1rem;font-size:0.85rem;">
                 {{ error.messageKey|trans(error.messageData, 'security') }}
