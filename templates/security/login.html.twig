@@ -1,38 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
 
 {% block body %}
-    <form method="post">
+<nav>
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
+  <div class="nav-links">
+    <a href="{{ path('app_cours') }}">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="{{ path('app_register') }}" class="nav-cta">S'inscrire</a>
+    <a href="{{ path('app_login') }}" class="nav-cta">Connexion</a>
+  </div>
+</nav>
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Connexion</h1>
+        <a href="{{ path('app_register') }}" class="btn btn-ghost btn-sm">Créer un compte →</a>
+    </div>
+
+    <div class="form-symfony">
+
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div style="background:#fdf0f0;color:#e05c5c;border:1px solid #f0c0c0;border-radius:8px;padding:0.85rem 1rem;margin-bottom:1rem;font-size:0.85rem;">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
         {% endif %}
 
         {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
+            <div style="font-size:0.85rem;color:var(--ink-3);margin-bottom:1rem;">
+                Connecté en tant que {{ app.user.userIdentifier }} —
+                <a href="{{ logout_path() }}" style="color:var(--forest)">Se déconnecter</a>
             </div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="username">Email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
-
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
+        <form method="post">
+            <div class="form-group">
+                <label for="username">Email</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus>
             </div>
-        #}
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
-    </form>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" name="_password" id="password" autocomplete="current-password" required>
+            </div>
+
+            <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+
+            <button class="btn" type="submit">Se connecter</button>
+        </form>
+
+        <p class="form-link">Pas encore de compte ? <a href="{{ path('app_register') }}">S'inscrire</a></p>
+    </div>
+</div>
+
+<footer>
+    <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
+</footer>
+
 {% endblock %}

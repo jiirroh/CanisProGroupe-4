@@ -10,23 +10,20 @@
 <nav>
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
   <div class="nav-links">
-    <a href="{{ path('app_cours_index') }}">Cours</a>
+    <a href="{{ path('app_cours') }}">Cours</a>
     <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
-    <a href="{{ path('app_register') }}" class="nav-cta">S'inscrire</a>
-    <a href="{{ path('app_login') }}" class="nav-cta">Connexion</a>
+    <a href="#" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">Connexion</a>
   </div>
 </nav>
 
 <div class="page-nav">
   <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
-  <a class="page-nav-link" href="{{ path('app_cours_index') }}">Cours</a>
+  <a class="page-nav-link active" href="{{ path('app_cours') }}">Cours</a>
   <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
-  <a class="page-nav-link" href="{{ path('app_chien_liste') }}">Liste des chiens</a>
-  <a class="page-nav-link active" href="{{ path('app_proprietaire_index') }}">Liste des propriétaires</a>
-<<<<<<< HEAD
+  <a class="page-nav-link" href="{{ path('app_chien_liste') }}">Gérer les chiens</a>
+  <a class="page-nav-link" href="{{ path('app_proprietaire_index') }}">Gérer les propriétaires</a>
   <a class="page-nav-link" href="{{ path('app_cours_index') }}">Gérer les cours</a>
-=======
->>>>>>> 74dcc02c4579c53b0dfc984a26c6cecfccdb7873
 </div>
 
 <div class="admin-container">

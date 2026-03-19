@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
+use App\Repository\CoursRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    // L'URL d'accueil "/" (sans le préfixe /chien)
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(CoursRepository $coursRepository): Response
     {
-        // On redirige le visiteur vers la page des chiens
-        return $this->redirectToRoute('app_chien_index');
+        return $this->render('home/index.html.twig', [
+            'cours' => $coursRepository->findBy([], ['id' => 'DESC'], 3),
+        ]);
     }
 }

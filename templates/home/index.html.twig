@@ -117,81 +117,46 @@
 <!-- ──────────────────────────────────────
      PAGE 2 — LISTE DES COURS
 ─────────────────────────────────────── -->
-<section id="cours">
+<section>
   <div class="section-inner">
     <p class="section-label">Nos formations</p>
     <h2 class="section-title">Tous les <em>cours disponibles</em></h2>
     <p class="section-sub">Des séances adaptées à tous les niveaux, en groupe ou en individuel.</p>
 
     <div class="cours-grid">
-
-      <!-- Cours 1 -->
-      <div class="cours-card">
-        <div class="cours-img green">
-          🐕
-          <span class="cours-badge new">Nouveau</span>
-        </div>
-        <div class="cours-body">
-          <span class="cours-level">Débutant</span>
-          <h3 class="cours-title">Obéissance de base</h3>
-          <p class="cours-desc">Apprentissage des ordres fondamentaux : assis, couché, reste, rappel. Idéal pour les jeunes chiens.</p>
-          <div class="cours-meta">
-            <span>📅 Lun & Mer 10h</span>
-            <span>👥 6 / 8 places</span>
-            <span>⏱ 1h</span>
+    {% if cours is defined %}
+      {% for cour in cours %}
+        <div class="cours-card">
+          <div class="cours-img {{ loop.index is odd ? 'green' : (loop.index % 3 == 2 ? 'amber' : 'blue') }}">
+            {{ loop.index == 1 ? '🐕' : (loop.index == 2 ? '🏆' : '🤝') }}
+            {% if loop.index == 1 %}
+              <span class="cours-badge new">Nouveau</span>
+            {% endif %}
           </div>
-          <div class="cours-footer">
-            <div class="cours-price">45€ <small>/ séance</small></div>
-            <button class="btn-reserver">Réserver</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cours 2 -->
-      <div class="cours-card">
-        <div class="cours-img amber">
-          🏆
-          <span class="cours-badge full">Complet</span>
-        </div>
-        <div class="cours-body">
-          <span class="cours-level">Intermédiaire</span>
-          <h3 class="cours-title">Agility niveau 2</h3>
-          <p class="cours-desc">Parcours d'obstacles, sauts, tunnels et slaloms. Renforce la complicité chien-maître.</p>
-          <div class="cours-meta">
-            <span>📅 Sam 9h–11h</span>
-            <span>👥 8 / 8 places</span>
-            <span>⏱ 2h</span>
-          </div>
-          <div class="cours-footer">
-            <div class="cours-price">60€ <small>/ séance</small></div>
-            <button class="btn-reserver full" disabled>Complet</button>
+          <div class="cours-body">
+            <span class="cours-level">{{ cour.niveau }}</span>
+            <h3 class="cours-title">{{ cour.libelle }}</h3>
+            <p class="cours-desc">{{ cour.descriptions|slice(0, 100) }}...</p>
+            <div class="cours-meta">
+              <span>📅 {{ cour.dateHeure ? cour.dateHeure|date('D H:i') : '—' }}</span>
+              <span>👥 {{ cour.nbChien }} places</span>
+            </div>
+            <div class="cours-footer">
+              <div class="cours-price">{{ cour.prix }}€ <small>/ séance</small></div>
+              <a href="#" class="btn-reserver">Réserver</a>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Cours 3 -->
-      <div class="cours-card">
-        <div class="cours-img blue">
-          🤝
-        </div>
-        <div class="cours-body">
-          <span class="cours-level">Tous niveaux</span>
-          <h3 class="cours-title">Socialisation</h3>
-          <p class="cours-desc">Interactions contrôlées entre chiens. Gestion des réactions et développement de la confiance.</p>
-          <div class="cours-meta">
-            <span>📅 Jeu 14h</span>
-            <span>👥 4 / 10 places</span>
-            <span>⏱ 1h30</span>
-          </div>
-          <div class="cours-footer">
-            <div class="cours-price">38€ <small>/ séance</small></div>
-            <button class="btn-reserver">Réserver</button>
-          </div>
-        </div>
-      </div>
-
+        
+      {% else %}
+        <p style="color: var(--ink-3); grid-column: 1/-1; text-align:center; padding: 3rem 0;">Aucun cours disponible pour le moment.</p>
+      {% endfor %}
+      {% endif %}
     </div>
   </div>
+  <div style="text-align: center; margin-top: 2rem;">
+    <a href="{{ path('app_cours') }}" class="btn btn-primary">Voir tous les cours →</a>
+</div>
 </section>
 
 <!-- ──────────────────────────────────────

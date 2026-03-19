@@ -1,21 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Créer un compte{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<nav>
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
+  <div class="nav-links">
+    <a href="{{ path('app_cours') }}">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="{{ path('app_register') }}" class="nav-cta">S'inscrire</a>
+    <a href="{{ path('app_login') }}" class="nav-cta">Connexion</a>
+  </div>
+</nav>
 
-    {{ form_errors(registrationForm) }}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Créer un compte</h1>
+        <a href="{{ path('app_login') }}" class="btn btn-ghost btn-sm">← Connexion</a>
+    </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
+    <div class="form-symfony">
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
             {{ form_row(registrationForm.Nom) }}
             {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Mot de passe'
+            }) }}
+            {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            <button type="submit" class="btn">Créer mon compte</button>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
+
+<footer>
+    <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
+</footer>
+
 {% endblock %}
