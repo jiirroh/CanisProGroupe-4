@@ -14,14 +14,21 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/cours')]
 final class CoursController extends AbstractController
 {
-    #[Route(name: 'app_cours_index', methods: ['GET'])]
-    public function index(CoursRepository $coursRepository): Response
-    {
-        return $this->render('cours/index.html.twig', [
-            'cours' => $coursRepository->findAll(),
-        ]);
-    }
+    #[Route(name: 'app_cours', methods: ['GET'])]
+public function cours(CoursRepository $coursRepository): Response
+{
+    return $this->render('cours/index.html.twig', [
+        'cours' => $coursRepository->findAll(),
+    ]);
+}
 
+#[Route('/admin', name: 'app_cours_index', methods: ['GET'])]
+public function index(CoursRepository $coursRepository): Response
+{
+    return $this->render('cours/ajout_cours.html.twig', [
+        'cours' => $coursRepository->findAll(),
+    ]);
+}
     #[Route('/new', name: 'app_cours_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

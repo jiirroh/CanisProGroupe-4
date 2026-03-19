@@ -1,14 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administration Chiens{% endblock %}
+{% block title %}Cours{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 {% endblock %}
 
 {% block body %}
-<header>
- <nav>
+<nav>
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
   <div class="nav-links">
     <a href="{{ path('app_cours') }}">Cours</a>
@@ -27,15 +26,10 @@
    <a class="page-nav-link" href="{{ path('app_cours_index') }}">Gérer les cours</a> 
 </div>
 
-    
-</header>
-
 <div class="admin-container">
     <div class="admin-header">
-        <h1>Gestion des chiens</h1>
-        <a href="{{ path('chien_ajouter') }}" class="btn-add">
-            + Ajouter un chien
-        </a>
+        <h1>Gestion des cours</h1>
+        <a href="{{ path('app_cours_new') }}" class="btn-add">+ Nouveau cours</a>
     </div>
 
     <div class="table-wrapper">
@@ -43,30 +37,34 @@
             <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>Race</th>
-                    <th>Age</th>
+                    <th>Niveau</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Date & Heure</th>
+                    <th>Nb chiens</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for chien in chiens %}
+                {% for cour in cours %}
                     <tr>
-                        <td class="td-nom">{{ chien.nom }}</td>
-                        <td class="td-race">{{ chien.race }}</td>
-                        <td class="age-text">{{ chien.age }} ans</td>
+                        <td class="td-nom">{{ cour.libelle }}</td>
+                        <td>{{ cour.niveau }}</td>
+                        <td class="td-race">{{ cour.descriptions|slice(0, 60) }}...</td>
+                        <td>{{ cour.prix }} €</td>
+                        <td>{{ cour.dateHeure ? cour.dateHeure|date('d/m/Y à H:i') : '—' }}</td>
+                        <td>{{ cour.nbChien }}</td>
                         <td class="td-actions">
-                            <a href="{{ path('chien_modification', {'id': chien.id}) }}" class="btn" style="background: var(--forest-3); color: white; padding: 0.5rem 1rem; font-size: 0.8rem;">
-                                Modifier
-                            </a>
-                            <form method="POST" action="{{ path('app_chien_delete', {'id': chien.id}) }}" onsubmit="return confirm('Supprimer ce chien ?');">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ chien.id) }}">
-                                <button type="submit" class="btn-delete">Supprimer</button>
+                            <a href="{{ path('app_cours_edit', {'id': cour.id}) }}" class="btn btn-outline btn-sm">Modifier</a>
+                            <form method="POST" action="{{ path('app_cours_delete', {'id': cour.id}) }}" onsubmit="return confirm('Supprimer ce cours ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cour.id) }}">
+                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
                             </form>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="4" style="text-align: center; padding: 3rem; color: var(--ink-3);">Aucun chien enregistré.</td>
+                        <td colspan="7" class="td-empty">Aucun cours enregistré.</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -77,4 +75,5 @@
 <footer>
     <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
 </footer>
+
 {% endblock %}

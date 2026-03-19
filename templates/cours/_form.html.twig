@@ -1,4 +1,9 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.libelle) }}
+    {{ form_row(form.niveau) }}
+    {{ form_row(form.descriptions) }}
+    {{ form_row(form.prix) }}
+    {{ form_row(form.dateHeure) }}
+    {{ form_row(form.nbChien) }}
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

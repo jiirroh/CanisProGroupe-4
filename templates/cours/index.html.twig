@@ -1,63 +1,69 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Nos Cours{% endblock %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 {% endblock %}
-{% block title %}Cours{% endblock %}
 
 {% block body %}
 <nav>
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
   <div class="nav-links">
-    <a href="#cours">Cours</a>
+    <a href="{{ path('app_cours') }}">Cours</a>
     <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
-    <a href="#profil" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">S'inscrire</a>
     <a href="#" class="nav-cta">Connexion</a>
   </div>
 </nav>
-    <h1>Cours </h1>
-   <a href="{{ path('app_cours_new') }}" class="btn-add">
-            Nouveau cours
-        </a>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom des cours</th>
-                <th>Niveau</th>
-                <th>Descriptions</th>
-                <th>Prix</th>
-                <th>Date et l'heure</th>
-                <th>Nombre de chiens</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for cour in cours %}
-            <tr>
-                <td>{{ cour.libelle }}</td>
-                <td>{{ cour.niveau }}</td>
-                <td>{{ cour.descriptions }}</td>
-                <td>{{ cour.prix }}</td>
-                <td>{{ cour.dateHeure ? cour.dateHeure|date('Y-m-d à H:i:s') : '' }}</td>
-                <td>{{ cour.nbChien }}</td>
-                <td class="td-actions">
-                            <a href="{{ path('chien_modification', {'id': cour.id}) }}" class="btn" style="background: var(--forest-3); color: white; padding: 0.5rem 1rem; font-size: 0.8rem;">
-                                Modifier
-                            </a>
-                            <form method="POST" action="{{ path('app_chien_delete', {'id': cour.id}) }}" onsubmit="return confirm('Supprimer ce chien ?');">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cour.id) }}">
-                                <button type="submit" class="btn-delete">Supprimer</button>
-                            </form>
-                        </td>
-                    </tr>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="page-nav">
+  <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
+  <a class="page-nav-link active" href="{{ path('app_cours') }}">Cours</a>
+  <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+  <a class="page-nav-link" href="{{ path('app_chien_liste') }}">Liste des chiens</a>
+  <a class="page-nav-link" href="{{ path('app_proprietaire_index') }}">Liste des propriétaires</a>
+  <a class="page-nav-link" href="{{ path('app_cours_index') }}">Gérer les cours</a>
+</div>
 
-   
+<section>
+  <div class="section-inner">
+    <p class="section-label">Nos formations</p>
+    <h2 class="section-title">Tous les <em>cours disponibles</em></h2>
+    <p class="section-sub">Des séances adaptées à tous les niveaux, en groupe ou en individuel.</p>
+
+    <div class="cours-grid">
+      {% for cour in cours %}
+        <div class="cours-card">
+          <div class="cours-img {{ loop.index is odd ? 'green' : (loop.index % 3 == 2 ? 'amber' : 'blue') }}">
+            {{ loop.index == 1 ? '🐕' : (loop.index == 2 ? '🏆' : '🤝') }}
+            {% if loop.index == 1 %}
+              <span class="cours-badge new">Nouveau</span>
+            {% endif %}
+          </div>
+          <div class="cours-body">
+            <span class="cours-level">{{ cour.niveau }}</span>
+            <h3 class="cours-title">{{ cour.libelle }}</h3>
+            <p class="cours-desc">{{ cour.descriptions|slice(0, 100) }}...</p>
+            <div class="cours-meta">
+              <span>📅 {{ cour.dateHeure ? cour.dateHeure|date('D H:i') : '—' }}</span>
+              <span>👥 {{ cour.nbChien }} places</span>
+            </div>
+            <div class="cours-footer">
+              <div class="cours-price">{{ cour.prix }}€ <small>/ séance</small></div>
+              <a href="#" class="btn-reserver">Réserver</a>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <p style="color: var(--ink-3); grid-column: 1/-1; text-align:center; padding: 3rem 0;">Aucun cours disponible pour le moment.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<footer>
+    <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
+</footer>
+
 {% endblock %}
