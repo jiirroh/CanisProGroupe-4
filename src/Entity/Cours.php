@@ -13,31 +13,37 @@ class Cours
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 25)]
-    private ?string $type = null;
+    #[ORM\Column(length: 100)]
+    private ?string $libelle = null;
 
-    #[ORM\Column(length: 15)]
+    #[ORM\Column(length: 50)]
     private ?string $niveau = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
+    #[ORM\Column(length: 100)]
+    private ?string $descriptions = null;
+
+    #[ORM\Column(length: 10)]
+    private ?string $prix = null;
 
     #[ORM\Column]
-    private ?float $prix = null;
+    private ?\DateTime $dateHeure = null;
+
+    #[ORM\Column(length: 4)]
+    private ?string $nbChien = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getLibelle(): ?string
     {
-        return $this->type;
+        return $this->libelle;
     }
 
-    public function setType(string $type): static
+    public function setLibelle(string $libelle): static
     {
-        $this->type = $type;
+        $this->libelle = $libelle;
 
         return $this;
     }
@@ -54,26 +60,50 @@ class Cours
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescriptions(): ?string
     {
-        return $this->description;
+        return $this->descriptions;
     }
 
-    public function setDescription(string $description): static
+    public function setDescriptions(string $descriptions): static
     {
-        $this->description = $description;
+        $this->descriptions = $descriptions;
 
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrix(): ?string
     {
         return $this->prix;
     }
 
-    public function setPrix(float $prix): static
+    public function setPrix(string $prix): static
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getDateHeure(): ?\DateTime
+    {
+        return $this->dateHeure;
+    }
+
+    public function setDateHeure(\DateTime $dateHeure): static
+    {
+        $this->dateHeure = $dateHeure;
+
+        return $this;
+    }
+
+    public function getNbChien(): ?string
+    {
+        return $this->nbChien;
+    }
+
+    public function setNbChien(string $nbChien): static
+    {
+        $this->nbChien = $nbChien;
 
         return $this;
     }

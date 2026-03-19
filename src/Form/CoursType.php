@@ -2,25 +2,29 @@
 
 namespace App\Form;
 
-use App\Entity\Seance;
+use App\Entity\Cours;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SeanceType extends AbstractType
+class CoursType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('libelle')
+            ->add('niveau')
+            ->add('descriptions')
+            ->add('prix')
             ->add('dateHeure')
-            ->add('nbMaxChien')
+            ->add('nbChien')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Seance::class,
+            'data_class' => Cours::class,
         ]);
     }
 }
