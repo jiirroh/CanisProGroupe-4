@@ -37,11 +37,13 @@
     margin: 0;
     padding: 0;
 }
-html {
+html,body {
     scroll-behavior: smooth;
+    height: 100%;
 }
+
 body {
-    display : flex;
+    display: flex;
     flex-direction: column;
     min-height: 100vh;
     font-family: var(--body);
@@ -52,6 +54,9 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+body > *:not(nav):not(.page-nav):not(footer) {
+    flex: 1;
+}
 /* ══════════════════════════════════════
    NAVIGATION
 ══════════════════════════════════════ */
@@ -1496,7 +1501,8 @@ footer {
     text-align: center;
     padding: 2rem;
     font-size: 0.82rem;
-    width: 100%; /* S'assure qu'il prend toute la largeur */
+    width: 100%;
+    margin-top: auto; 
 }
 
 footer strong {
@@ -1878,4 +1884,51 @@ footer strong {
     color: var(--ink-3);
     padding: 2.5rem 1.5rem !important;
     font-size: 0.88rem;
+}.form-symfony,
+.form-symfony form {
+    width: 100%;
+}
+
+.form-symfony .form-group,
+.form-symfony > div,
+.form-symfony form > div {
+    margin-bottom: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-symfony label,
+.form-symfony .col-form-label {
+    font-size: 0.73rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+    color: var(--ink-3) !important;
+}
+
+.form-symfony input[type="text"],
+.form-symfony input[type="number"],
+.form-symfony input[type="email"],
+.form-symfony input[type="password"],
+.form-symfony input[type="date"],
+.form-symfony select,
+.form-symfony textarea {
+    width: 100% !important;
+    padding: 0.75rem 0.9rem !important;
+    border: 1.5px solid var(--sand-3) !important;
+    border-radius: 8px !important;
+    font-family: var(--body) !important;
+    font-size: 0.88rem !important;
+    color: var(--ink) !important;
+    background: var(--cream) !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transition: border-color var(--ease) !important;
+}
+
+.form-symfony input:focus,
+.form-symfony select:focus,
+.form-symfony textarea:focus {
+    border-color: var(--forest) !important;
 }

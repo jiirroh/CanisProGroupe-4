@@ -1,11 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Proprietaire{% endblock %}
+{% block title %}Ajouter un propriétaire{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Proprietaire</h1>
+<nav>
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
+  <div class="nav-links">
+    <a href="{{ path('app_cours') }}">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="#" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">Connexion</a>
+  </div>
+</nav>
+
+<div class="page-nav">
+  <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
+  <a class="page-nav-link" href="{{ path('app_cours') }}">Cours</a>
+  <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+  <a class="page-nav-link" href="{{ path('app_chien_liste') }}">Liste des chiens</a>
+  <a class="page-nav-link active" href="{{ path('app_proprietaire_index') }}">Liste des propriétaires</a>
+  <a class="page-nav-link" href="{{ path('app_seance_index') }}">Liste des séances</a>
+</div>
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Ajouter un propriétaire</h1>
+        <a href="{{ path('app_proprietaire_index') }}" class="btn btn-ghost btn-sm">← Retour</a>
+    </div>
 
     {{ include('proprietaire/_form.html.twig') }}
+</div>
 
-    <a href="{{ path('app_proprietaire_index') }}">back to list</a>
+<footer>
+    <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
+</footer>
+
 {% endblock %}

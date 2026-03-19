@@ -7,13 +7,12 @@
 {% endblock %}
 
 {% block body %}
-<header>
-    <nav>
+<nav>
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
   <div class="nav-links">
-    <a href="#cours">Cours</a>
+    <a href="{{ path('app_cours') }}">Cours</a>
     <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
-    <a href="#profil" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">S'inscrire</a>
     <a href="#" class="nav-cta">Connexion</a>
   </div>
 </nav>
@@ -22,19 +21,15 @@
   <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
   <a class="page-nav-link" href="{{ path('app_cours') }}">Cours</a>
   <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
-  <a class="page-nav-link" href="{{path('app_chien_liste')}}">Liste des chiens</a>
-  <a class="page-nav-link" href="{{path('app_proprietaire_index')}}">Liste des propriétaires</a>
-  <a class="page-nav-link" href="{{path('app_seance_index')}}">Liste des seances</a>
+  <a class="page-nav-link" href="{{ path('app_chien_liste') }}">Liste des chiens</a>
+  <a class="page-nav-link active" href="{{ path('app_proprietaire_index') }}">Liste des propriétaires</a>
+  <a class="page-nav-link" href="{{ path('app_seance_index') }}">Liste des séances</a>
 </div>
-   
-</header>
 
 <div class="admin-container">
     <div class="admin-header">
         <h1>Gestion des propriétaires</h1>
-        <a href="{{ path('app_proprietaire_new') }}" class="btn-add">
-            + Ajouter un propriétaire
-        </a>
+        <a href="{{ path('app_proprietaire_new') }}" class="btn-add">+ Ajouter un propriétaire</a>
     </div>
 
     <div class="table-wrapper">
@@ -50,21 +45,18 @@
                 {% for proprietaire in proprietaires %}
                     <tr>
                         <td class="td-nom">{{ proprietaire.nom }}</td>
-                        <td>{{ proprietaire.prenom }}</td>
+                        <td class="td-proprietaire">{{ proprietaire.prenom }}</td>
                         <td class="td-actions">
-                            {# Utilisation de la classe .btn et des tokens de couleur du CSS #}
-                            <a href="{{ path('app_proprietaire_edit', {'id': proprietaire.id}) }}" class="btn" style="background: var(--forest-3); color: white; padding: 0.5rem 1rem; font-size: 0.8rem;">
-                                Modifier
-                            </a>
-                            <form method="POST" action="{{ path('app_proprietaire_delete', {'id': proprietaire.id}) }}" onsubmit="return confirm('Supprimer ce propriétaire ?');">
+                            <a href="{{ path('app_proprietaire_edit', {'id': proprietaire.id}) }}" class="btn btn-outline btn-sm">Modifier</a>
+                            <form method="POST" action="{{ path('app_proprietaire_delete', {'id': proprietaire.id}) }}" onsubmit="return confirm('Supprimer ?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ proprietaire.id) }}">
-                                <button type="submit" class="btn-delete">Supprimer</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
                             </form>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="3" style="text-align: center; padding: 3rem; color: var(--ink-3);">Aucun propriétaire enregistré.</td>
+                        <td colspan="3" class="td-empty">Aucun propriétaire enregistré.</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -75,4 +67,5 @@
 <footer>
     <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
 </footer>
+
 {% endblock %}
