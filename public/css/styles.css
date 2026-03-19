@@ -402,7 +402,6 @@ section {
     background: var(--forest);
     padding: 5rem 2rem 4rem;
     position: relative;
-    overflow: hidden;
 }
 .hero::before {
     content: "";
@@ -477,8 +476,7 @@ section {
     font-style: italic;
     color: var(--amber-2);
 }
-.hero-desc,
-.hero > .hero-inner p {
+.hero-desc {
     color: rgba(245, 240, 232, 0.7);
     font-size: 1rem;
     line-height: 1.7;

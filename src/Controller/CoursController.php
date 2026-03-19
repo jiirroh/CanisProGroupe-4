@@ -22,7 +22,7 @@ final class CoursController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_cours_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_cours_index_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $cour = new Cours();
@@ -42,7 +42,7 @@ final class CoursController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_cours_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_cours_index_show', methods: ['GET'])]
     public function show(Cours $cour): Response
     {
         return $this->render('cours/show.html.twig', [
@@ -50,7 +50,7 @@ final class CoursController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_cours_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_cours_index_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Cours $cour, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CoursType::class, $cour);
@@ -68,7 +68,7 @@ final class CoursController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_cours_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_cours_index_delete', methods: ['POST'])]
     public function delete(Request $request, Cours $cour, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$cour->getId(), $request->getPayload()->getString('_token'))) {

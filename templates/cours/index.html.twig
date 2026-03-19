@@ -27,8 +27,8 @@
                 <td>{{ cour.dateHeure ? cour.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ cour.nbChien }}</td>
                 <td>
-                    <a href="{{ path('app_cours_show', {'id': cour.id}) }}">show</a>
-                    <a href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
+                    <a href="{{ path('app_cours_index_show', {'id': cour.id}) }}">show</a>
+                    <a href="{{ path('app_cours_index_edit', {'id': cour.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_cours_new') }}">Create new</a>
+    <a href="{{ path('app_cours_index_new') }}">Create new</a>
 {% endblock %}
