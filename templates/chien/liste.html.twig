@@ -44,6 +44,7 @@
                     <th>Nom</th>
                     <th>Race</th>
                     <th>Age</th>
+                    <th>Proprietaire</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -53,6 +54,7 @@
                         <td class="td-nom">{{ chien.nom }}</td>
                         <td class="td-race">{{ chien.race }}</td>
                         <td class="age-text">{{ chien.age }} ans</td>
+                        <td class="td-proprietaire">{{ chien.proprietaire ? chien.proprietaire.nom : 'Aucun' }}</td>
                         <td class="td-actions">
                             <a href="{{ path('chien_modification', {'id': chien.id}) }}" class="btn" style="background: var(--forest-3); color: white; padding: 0.5rem 1rem; font-size: 0.8rem;">
                                 Modifier

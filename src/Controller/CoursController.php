@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Cours;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;

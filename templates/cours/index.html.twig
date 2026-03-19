@@ -44,7 +44,7 @@
                             <a href="{{ path('chien_modification', {'id': cour.id}) }}" class="btn" style="background: var(--forest-3); color: white; padding: 0.5rem 1rem; font-size: 0.8rem;">
                                 Modifier
                             </a>
-                            <form method="POST" action="{{ path('app_chien_delete', {'id': cour.id}) }}" onsubmit="return confirm('Supprimer ce chien ?');">
+                            <form method="POST" action="{{ path('app_cours_delete', {'id': cour.id}) }}" onsubmit="return confirm('Supprimer ce chien ?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cour.id) }}">
                                 <button type="submit" class="btn-delete">Supprimer</button>
                             </form>
