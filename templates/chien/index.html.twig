@@ -12,7 +12,7 @@
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
   
   {% if app.user %}
-    <span style="margin-right: 15px;">Bonjour, {{ app.user.email }} !</span>
+    <span style="margin-right: 15px;">Bonjour, {{ app.user.prenom }} !</span>
     <a href="{{ path('app_logout') }}">Déconnexion</a>
   {% else %}
     <a href="{{ path('app_login') }}">Connexion</a>
