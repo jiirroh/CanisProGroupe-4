@@ -40,7 +40,14 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/chien/dashboard_admin, roles: ROLE_ADMIN }
+        - { path: ^/chien/_delete_form, roles: ROLE_ADMIN }
+        - { path: ^/chien/chien_ajouter, roles: ROLE_ADMIN }
+        - { path: ^/chien/edit, roles: ROLE_ADMIN }
+        - { path: ^/chien/_form, roles: ROLE_ADMIN }
+        - { path: ^/chien/index, roles: ROLE_ADMIN }
+        - { path: ^/chien/liste, roles: ROLE_ADMIN }
+        - { path: ^/chien/show, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
