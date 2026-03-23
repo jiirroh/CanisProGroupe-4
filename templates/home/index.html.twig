@@ -176,8 +176,8 @@
         <div class="sidebar-user">
           <div class="avatar">ML</div>
           <div>
-            <div class="sidebar-user-name">{{ app.user.prenom }} {{ app.user.nom }}</div>
-            <div class="sidebar-user-role">{{ app.user.roles|first }}</div>
+            <div class="sidebar-user-name">{{ app.user ? app.user.prenom }} {{ app.user ? app.user.nom }}</div>
+            <div class="sidebar-user-role">{{ app.user ? app.user.roles|first }}</div>
           </div>
         </div>
         <nav class="sidebar-nav">
@@ -210,7 +210,7 @@
       <div class="dash-main">
         <div class="dash-header">
           <div>
-            <h2>Bonjour, {{ app.user.prenom }} 👋</h2>
+            <h2>Bonjour, {{ app.user ? app.user.prenom }} 👋</h2>
             <p>Lundi 9 mars 2026 — 3 cours aujourd'hui</p>
           </div>
           <a href="#" class="btn-sm">+ Nouveau cours</a>
@@ -333,7 +333,7 @@
           </div>
           <div class="profil-info-row">
             <span class="profil-info-label">Propriétaire</span>
-            <span class="profil-info-value">{{ app.user.prenom }} {{ app.user.nom }}</span>
+            <span class="profil-info-value">{{ app.user ? app.user.prenom }} {{ app.user ? app.user.nom }}</span>
           </div>
           <div class="profil-info-row">
             <span class="profil-info-label">Inscrit depuis</span>
@@ -396,8 +396,8 @@
           <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
             <div class="avatar" style="width:48px;height:48px;font-size:1.2rem">TB</div>
             <div>
-              <div style="font-weight:500;color:var(--ink)">{{ app.user.prenom }} {{ app.user.nom }}</div>
-              <div style="font-size:0.78rem;color:var(--ink-3)">{{ app.user.email }}</div>
+              <div style="font-weight:500;color:var(--ink)">{{ app.user ? app.user.prenom }} {{ app.user ? app.user.nom }}</div>
+              <div style="font-size:0.78rem;color:var(--ink-3)">{{ app.user ? app.user.email }}</div>
               <div style="font-size:0.78rem;color:var(--ink-3)">+33 6 12 34 56 78</div>
             </div>
           </div>
