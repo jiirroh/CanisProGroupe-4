@@ -22,7 +22,7 @@ final class InscriptionController extends AbstractController
         ]);
     }
 
-   #[Route('/new', name: 'app_inscription_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_inscription_new', methods: ['GET', 'POST'])]
 public function new(Request $request, EntityManagerInterface $entityManager): Response
 {
     $inscription = new Inscription();
@@ -39,7 +39,7 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
         $entityManager->persist($inscription);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_inscription_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_cours', [], Response::HTTP_SEE_OTHER);
     }
 
     return $this->render('inscription/new.html.twig', [
@@ -65,7 +65,7 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_inscription_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_cours', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('inscription/edit.html.twig', [

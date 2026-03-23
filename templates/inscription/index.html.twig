@@ -1,38 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription index{% endblock %}
+{% block title %}Reservations{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Inscription index</h1>
+<nav>
+  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
+  <div class="nav-links">
+    <a href="{{ path('app_cours') }}">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="#" class="nav-cta">S'inscrire</a>
+    <a href="#" class="nav-cta">Connexion</a>
+  </div>
+</nav>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>DateInscrit</th>
-                <th>Cours</th>       
-                <th>Chien</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for inscription in inscriptions %}
-            <tr>
-                <td>{{ inscription.dateInscrit ? inscription.dateInscrit|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ inscription.cours ? inscription.cours.libelle : '' }}</td>
-                <td>{{ inscription.chien ? inscription.chien.nom : '' }}</td>
-                <td>{{ inscription.chien ? inscription.chien.proprietaire.prenom ~ ' ' ~ inscription.chien.proprietaire.nom : '' }}</td>
-                <td>
-                    <a href="{{ path('app_inscription_show', {'id': inscription.id}) }}">show</a>
-                    <a href="{{ path('app_inscription_edit', {'id': inscription.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="page-nav">
+  <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>
+  <a class="page-nav-link active" href="{{ path('app_cours') }}">Cours</a>
+  <a class="page-nav-link" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+  <a class="page-nav-link" href="{{ path('app_chien_liste') }}">Gérer les chiens</a>
+  <a class="page-nav-link" href="{{ path('app_proprietaire_index') }}">Gérer les propriétaires</a>
+  <a class="page-nav-link" href="{{ path('app_cours_index') }}">Gérer les cours</a> 
+  <a class="page-nav-link" href="{{ path('app_inscription_index') }}">Gérer les Reservations</a>
+</div>
 
-    <a href="{{ path('app_inscription_new') }}">Create new</a>
+{# DEBUT DE LA CORRECTION : Ajout de admin-container #}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Gestion des réservations</h1>
+        <a href="{{ path('app_inscription_new') }}" class="btn-add">+ Nouvelle inscription</a>
+    </div>
+
+    {# Ajout de table-wrapper #}
+    <div class="table-wrapper">
+        <table> {# On enlève class="table" si ton CSS cible directement table dans table-wrapper #}
+            <thead>
+                <tr>
+                    <th>DateInscrit</th>
+                    <th>Cours</th>       
+                    <th>Chien</th>
+                    <th>Propriétaire</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for inscription in inscriptions %}
+                <tr>
+                    <td>{{ inscription.dateInscrit ? inscription.dateInscrit|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ inscription.cours ? inscription.cours.libelle : '' }}</td>
+                    <td>{{ inscription.chien ? inscription.chien.nom : '' }}</td>
+                    <td>{{ inscription.chien ? inscription.chien.proprietaire.prenom ~ ' ' ~ inscription.chien.proprietaire.nom : '' }}</td>
+                    <td class="td-actions">
+                        <a href="{{ path('app_inscription_edit', {'id': inscription.id}) }}" class="btn btn-outline btn-sm">Modifier</a>
+                        <form method="POST" action="{{ path('app_inscription_delete', {'id': inscription.id}) }}" onsubmit="return confirm('Supprimer cette inscription ?');" style="display:inline-block;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ inscription.id) }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="td-empty">Aucune réservation enregistrée.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+    <strong>CanisPro</strong> — Maquette Symfony · Espace Propriétaire · 2026
+</footer>
+{# FIN DE LA CORRECTION #}
+
 {% endblock %}
