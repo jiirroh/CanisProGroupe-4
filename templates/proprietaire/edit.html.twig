@@ -9,13 +9,19 @@
 {% block body %}
 
 <nav>
+<div class="nav-container">
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
-  <div class="nav-links">
-    <a href="{{ path('app_cours_index') }}">Cours</a>
-    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
-    <a href="#" class="nav-cta">S'inscrire</a>
-    <a href="#" class="nav-cta">Connexion</a>
-  </div>
+ {% if app.user %}
+    {# L'utilisateur est connecté, on affiche le bouton de déconnexion #}
+    <a href="{{ path('app_logout') }}">Déconnexion</a>
+{% else %}
+    {# L'utilisateur n'est pas connecté, on affiche le bouton de connexion #}
+    <a href="{{ path('app_login') }}">Connexion</a>
+    
+    {# Tu peux aussi ajouter le bouton d'inscription ici si tu en as un #}
+    <a href="{{ path('app_register') }}">S'inscrire</a> 
+{% endif %}
+</div>
 </nav>
 
 <div class="page-nav">

@@ -10,6 +10,7 @@
 
 
 <nav>
+<div class="nav-container">
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
  {% if app.user %}
     {# L'utilisateur est connecté, on affiche le bouton de déconnexion #}
@@ -21,6 +22,7 @@
     {# Tu peux aussi ajouter le bouton d'inscription ici si tu en as un #}
     <a href="{{ path('app_register') }}">S'inscrire</a> 
 {% endif %}
+</div>
 </nav>
 
 <div class="page-nav">
