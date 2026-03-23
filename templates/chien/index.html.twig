@@ -1,4 +1,4 @@
- {% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}CanisPro — École de dressage canin{% endblock %}
 
@@ -10,14 +10,12 @@
 
 <nav>
   <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
-  
-  {% if app.user %}
-    <span style="margin-right: 15px;">Bonjour, {{ app.user.prenom }} !</span>
-    <a href="{{ path('app_logout') }}">Déconnexion</a>
-  {% else %}
-    <a href="{{ path('app_login') }}">Connexion</a>
-    <a href="{{ path('app_register') }}">S'inscrire</a> 
-  {% endif %}
+  <div class="nav-links">
+    <a href="#cours">Cours</a>
+    <a href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    <a href="{{ path('app_register') }}" class="nav-cta">S'inscrire</a>
+    <a href="{{ path('app_login') }}" class="nav-cta">Connexion</a>
+  </div>
 </nav>
 
 <div class="page-nav">
@@ -37,7 +35,7 @@
       <h1>Des cours adaptés à chaque <em>compagnon</em></h1>
       <p>Trouvez le cours parfait pour votre chien, réservez en ligne et suivez sa progression avec vos éducateurs certifiés.</p>
       <div class="hero-actions">
-        <a href="#cours" class="btn-primary-hero">Voir les cours →</a>
+        <a class="page-nav-link" href="{{ path('app_cours_index') }}">Voir les cours →</a>
         <a href="#dashboard" class="btn-ghost-hero">Espace propriétaire</a>
       </div>
       <div class="hero-stats">
@@ -75,333 +73,42 @@
 <!-- ──────────────────────────────────────
      PAGE 2 — LISTE DES COURS
 ─────────────────────────────────────── -->
-<section id="cours">
+<section>
   <div class="section-inner">
     <p class="section-label">Nos formations</p>
     <h2 class="section-title">Tous les <em>cours disponibles</em></h2>
     <p class="section-sub">Des séances adaptées à tous les niveaux, en groupe ou en individuel.</p>
 
     <div class="cours-grid">
-
-      <!-- Cours 1 -->
-      <div class="cours-card">
-        <div class="cours-img green">
-          🐕
-          <span class="cours-badge new">Nouveau</span>
-        </div>
-        <div class="cours-body">
-          <span class="cours-level">Débutant</span>
-          <h3 class="cours-title">Obéissance de base</h3>
-          <p class="cours-desc">Apprentissage des ordres fondamentaux : assis, couché, reste, rappel. Idéal pour les jeunes chiens.</p>
-          <div class="cours-meta">
-            <span>📅 Lun & Mer 10h</span>
-            <span>👥 6 / 8 places</span>
-            <span>⏱ 1h</span>
+      {% for cour in cours %}
+        <div class="cours-card">
+          <div class="cours-img {{ loop.index is odd ? 'green' : (loop.index % 3 == 2 ? 'amber' : 'blue') }}">
+            {{ loop.index == 1 ? '🐕' : (loop.index == 2 ? '🏆' : '🤝') }}
+            {% if loop.index == 1 %}
+              <span class="cours-badge new">Nouveau</span>
+            {% endif %}
           </div>
-          <div class="cours-footer">
-            <div class="cours-price">45€ <small>/ séance</small></div>
-            <button class="btn-reserver">Réserver</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cours 2 -->
-      <div class="cours-card">
-        <div class="cours-img amber">
-          🏆
-          <span class="cours-badge full">Complet</span>
-        </div>
-        <div class="cours-body">
-          <span class="cours-level">Intermédiaire</span>
-          <h3 class="cours-title">Agility niveau 2</h3>
-          <p class="cours-desc">Parcours d'obstacles, sauts, tunnels et slaloms. Renforce la complicité chien-maître.</p>
-          <div class="cours-meta">
-            <span>📅 Sam 9h–11h</span>
-            <span>👥 8 / 8 places</span>
-            <span>⏱ 2h</span>
-          </div>
-          <div class="cours-footer">
-            <div class="cours-price">60€ <small>/ séance</small></div>
-            <button class="btn-reserver full" disabled>Complet</button>
+          <div class="cours-body">
+            <span class="cours-level">{{ cour.niveau }}</span>
+            <h3 class="cours-title">{{ cour.libelle }}</h3>
+            <p class="cours-desc">{{ cour.descriptions|slice(0, 100) }}...</p>
+            <div class="cours-meta">
+              <span>📅 {{ cour.dateHeure ? cour.dateHeure|date('D H:i') : '—' }}</span>
+              <span>👥 {{ cour.nbChien }} places</span>
+            </div>
+            <div class="cours-footer">
+              <div class="cours-price">{{ cour.prix }}€ <small>/ séance</small></div>
+              <a href="{{ path('app_inscription_index') }}" class="btn-reserver">Réserver</a>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Cours 3 -->
-      <div class="cours-card">
-        <div class="cours-img blue">
-          🤝
-        </div>
-        <div class="cours-body">
-          <span class="cours-level">Tous niveaux</span>
-          <h3 class="cours-title">Socialisation</h3>
-          <p class="cours-desc">Interactions contrôlées entre chiens. Gestion des réactions et développement de la confiance.</p>
-          <div class="cours-meta">
-            <span>📅 Jeu 14h</span>
-            <span>👥 4 / 10 places</span>
-            <span>⏱ 1h30</span>
-          </div>
-          <div class="cours-footer">
-            <div class="cours-price">38€ <small>/ séance</small></div>
-            <button class="btn-reserver">Réserver</button>
-          </div>
-        </div>
-      </div>
-
+      {% else %}
+        <p style="color: var(--ink-3); grid-column: 1/-1; text-align:center; padding: 3rem 0;">Aucun cours disponible pour le moment.</p>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- ──────────────────────────────────────
-     PAGE 3 — DASHBOARD ADMIN
-─────────────────────────────────────── -->
-<section class="dashboard-section" id="dashboard">
-  <div class="section-inner">
-    <p class="section-label">Espace admin</p>
-    <h2 class="section-title">Tableau de <em>bord</em></h2>
-
-    <div class="dashboard-grid">
-
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div class="sidebar-user">
-          <div class="avatar">ML</div>
-          <div>
-            <div class="sidebar-user-name">{{ app.user.prenom }} {{ app.user.nom }}</div>
-            <div class="sidebar-user-role">{{ app.user.roles|first }}</div>
-          </div>
-        </div>
-        <nav class="sidebar-nav">
-          <div class="sidebar-section-label">Principal</div>
-          <a class="sidebar-link active" href="#">
-            <span class="icon">📊</span> Tableau de bord
-          </a>
-          <a class="sidebar-link" href="#">
-            <span class="icon">📚</span> Cours
-          </a>
-          <a class="sidebar-link" href="#">
-            <span class="icon">📅</span> Planning
-          </a>
-          <div class="sidebar-section-label">Gestion</div>
-          <a class="sidebar-link" href="#">
-            <span class="icon">🐕</span> Chiens
-          </a>
-          <a class="sidebar-link" href="#">
-            <span class="icon">👤</span> Propriétaires
-          </a>
-          
-          <div class="sidebar-section-label">Autre</div>
-          <a class="sidebar-link" href="#">
-            <span class="icon">⚙️</span> Paramètres
-          </a>
-        </nav>
-      </aside>
-
-      <!-- Main content -->
-      <div class="dash-main">
-        <div class="dash-header">
-          <div>
-            <h2>Bonjour, {{ app.user.prenom }} 👋</h2>
-            <p>Lundi 9 mars 2026 — 3 cours aujourd'hui</p>
-          </div>
-          <a href="#" class="btn-sm">+ Nouveau cours</a>
-        </div>
-
-        <!-- KPIs -->
-        <div class="kpi-row">
-          <div class="kpi-card">
-            <div class="kpi-icon">🐕</div>
-            <div class="kpi-label">Chiens inscrits</div>
-            <div class="kpi-value">84</div>
-            <div class="kpi-delta">↑ +6 ce mois</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-icon">📚</div>
-            <div class="kpi-label">Cours actifs</div>
-            <div class="kpi-value">12</div>
-            <div class="kpi-delta">↑ +2 cette semaine</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-icon">📅</div>
-            <div class="kpi-label">Réservations</div>
-            <div class="kpi-value">37</div>
-            <div class="kpi-delta">↑ +12%</div>
-          </div>
-          <div class="kpi-card">
-            <div class="kpi-icon">💰</div>
-            <div class="kpi-label">Revenus / mois</div>
-            <div class="kpi-value">284 455 110€</div>
-            <div class="kpi-delta down">↓ -3%</div>
-          </div>
-        </div>
-
-        <!-- Table cours -->
-        <div class="table-card">
-          <div class="table-card-header">
-            <h3>Cours du jour</h3>
-            <div style="display:flex;gap:0.5rem">
-              <a href="#" class="btn-sm ghost">Voir tout</a>
-              <a href="#" class="btn-sm">+ Ajouter</a>
-            </div>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Cours</th>
-                <th>Horaire</th>
-                <th>Places</th>
-                <th>Statut</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-name">Obéissance débutant</td>
-                <td>10h00 – 11h00</td>
-                <td>6 / 8</td>
-                <td><span class="tag tag-green">● En cours</span></td>
-                <td><a href="#" class="btn-sm ghost">Voir</a></td>
-              </tr>
-              <tr>
-                <td class="td-name">Agility niveau 2</td>
-                <td>14h00 – 16h00</td>
-                <td>8 / 8</td>
-                <td><span class="tag tag-amber">● Complet</span></td>
-                <td><a href="#" class="btn-sm ghost">Voir</a></td>
-              </tr>
-              <tr>
-                <td class="td-name">Socialisation</td>
-                <td>17h30 – 19h00</td>
-                <td>4 / 10</td>
-                <td><span class="tag tag-blue">● À venir</span></td>
-                <td><a href="#" class="btn-sm ghost">Voir</a></td>
-              </tr>
-              <tr>
-                <td class="td-name">Rappel avancé</td>
-                <td>Annulé</td>
-                <td>—</td>
-                <td><span class="tag tag-red">● Annulé</span></td>
-                <td><a href="#" class="btn-sm ghost">Voir</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ──────────────────────────────────────
-     PAGE 4 — PROFIL CHIEN
-─────────────────────────────────────── -->
-<section class="profil-section" id="profil">
-  <div class="section-inner">
-    <p class="section-label">Fiche chien</p>
-    <h2 class="section-title">Profil de <em>Rocky</em></h2>
-
-    <div class="profil-grid">
-
-      <!-- Carte gauche -->
-      <div class="profil-card">
-        <div class="profil-card-top">
-          <span class="profil-animal-icon">🐕 ( photo )</span>
-          <div class="profil-card-name">Rocky</div>
-          <div class="profil-card-breed">Berger Australien • 3 ans</div>
-        </div>
-        <div class="profil-card-body">
-          <div class="profil-info-row">
-            <span class="profil-info-label">Race</span>
-            <span class="profil-info-value">Berger Australien</span>
-          </div>
-          <div class="profil-info-row">
-            <span class="profil-info-label">Âge</span>
-            <span class="profil-info-value">3 ans</span>
-          </div>
-          <div class="profil-info-row">
-            <span class="profil-info-label">Sexe</span>
-            <span class="profil-info-value">Mâle castré</span>
-          </div>
-          <div class="profil-info-row">
-            <span class="profil-info-label">Propriétaire</span>
-            <span class="profil-info-value">{{ app.user.prenom }} {{ app.user.nom }}</span>
-          </div>
-          <div class="profil-info-row">
-            <span class="profil-info-label">Inscrit depuis</span>
-            <span class="profil-info-value">Jan. 2025</span>
-          </div>
-          <div class="profil-info-row">
-            <span class="profil-info-label">Niveau</span>
-            <span class="tag tag-blue">Intermédiaire</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Contenu droite -->
-      <div class="profil-right">
-
-        <!-- Progression -->
-        <div class="profil-section-card">
-          <div class="profil-section-title">📈 Progression</div>
-          <div class="progress-wrap">
-            <div class="progress-label"><span>Obéissance</span><span>80%</span></div>
-            <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
-            <div class="progress-label"><span>Socialisation</span><span>65%</span></div>
-            <div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div>
-            <div class="progress-label"><span>Agility</span><span>40%</span></div>
-            <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
-          </div>
-        </div>
-
-        <!-- Historique cours -->
-        <div class="profil-section-card">
-          <div class="profil-section-title">📚 Cours suivis</div>
-          <div class="cours-historique">
-            <div class="cours-hist-item">
-              <div>
-                <div class="cours-hist-name">Obéissance de base</div>
-                <div class="cours-hist-date">Jan – Mars 2025 </div>
-              </div>
-              <span class="tag tag-green">Terminé</span>
-            </div>
-            <div class="cours-hist-item">
-              <div>
-                <div class="cours-hist-name">Socialisation</div>
-                <div class="cours-hist-date">Avr – Juin 2025</div>
-              </div>
-              <span class="tag tag-green">Terminé</span>
-            </div>
-            <div class="cours-hist-item">
-              <div>
-                <div class="cours-hist-name">Agility niveau 1</div>
-                <div class="cours-hist-date">En cours </div>
-              </div>
-              <span class="tag tag-blue">En cours</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Propriétaire -->
-        <div class="profil-section-card">
-          <div class="profil-section-title">👤 Propriétaire</div>
-          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
-            <div class="avatar" style="width:48px;height:48px;font-size:1.2rem">TB</div>
-            <div>
-              <div style="font-weight:500;color:var(--ink)">{{ app.user.prenom }} {{ app.user.nom }}</div>
-              <div style="font-size:0.78rem;color:var(--ink-3)">{{ app.user.email }}</div>
-              <div style="font-size:0.78rem;color:var(--ink-3)">+33 6 12 34 56 78</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:0.5rem">
-            <a href="#" class="btn-sm ghost">Envoyer un message</a>
-            <a href="#" class="btn-sm">Voir profil</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
 
 <footer>
   <strong>CanisPro</strong> — Maquette Symfony · Projet école · 2026
@@ -409,4 +116,4 @@
 
 
 {% endblock %}
- 
+ #}

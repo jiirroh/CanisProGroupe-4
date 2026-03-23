@@ -43,173 +43,129 @@
 
     <div class="espace-grid">
 
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div class="sidebar-user">
-          <div class="avatar">AD</div>
-          <div>
-            <div class="sidebar-name">Admin</div>
-            <div class="sidebar-role">Administrateur</div>
+  <!-- Contenu principal -->
+  <div class="dash-main">
+
+    <!-- Bienvenue -->
+    <div class="dash-welcome">
+      <div>
+        <h2>Bonjour {{ app.user.prenom }}</h2>
+        <p>Vous avez 2 séances cette semaine · Rocky progresse bien !</p>
+      </div>
+      <a href="#catalogue" class="btn btn-amber">Réserver un cours</a>
+    </div>
+
+    <!-- Mes chiens -->
+    <div>
+      <div class="sub-header">
+        <h3>Les chiens</h3>
+        <a href="#" class="btn btn-ghost btn-sm">+ Ajouter un chien</a>
+      </div>
+      <div class="chiens-row">
+
+        {% for chien in chiens %}
+        <div class="chien-card">
+          <div class="chien-card-top">
+            <div class="chien-icon green">🐕</div>
+            <div>
+              <div class="chien-name">{{ chien.nom }}</div>
+              <div class="chien-breed">{{ chien.race }} · {{ chien.age }}</div>
+            </div>
+          </div>
+          <div class="chien-stats">
+            <div class="chien-stat">
+              <div class="chien-stat-val">{{ chien.inscriptions|length }}</div>
+              <div class="chien-stat-label">Cours</div>
+            </div>
+            <div class="chien-stat">
+              <div class="chien-stat-val">80%</div>
+              <div class="chien-stat-label">Progrès</div>
+            </div>
+            <div class="chien-stat">
+              {% set upcoming_courses = 0 %}
+              {% for inscription in chien.inscriptions %}
+                  {% if inscription.cours.dateHeure > "now" %}
+                      {% set upcoming_courses = upcoming_courses + 1 %}
+                  {% endif %}
+              {% endfor %}
+              <div class="chien-stat-val">{{ upcoming_courses }}</div>
+              <div class="chien-stat-label">À venir</div>
+            </div>
+          </div>
+          <div class="chien-card-footer">
+            <a href="#fiche" class="btn btn-outline btn-sm">Voir fiche</a>
+            <a href="#catalogue" class="btn btn-primary btn-sm">Inscrire</a>
           </div>
         </div>
-        <nav class="sidebar-nav">
-          <div class="sidebar-section-label">Mon espace</div>
-          <a class="sidebar-link active" href="#">
-            <span class="icon"></span> Tableau de bord
-          </a>
-          <a class="sidebar-link" href="#">
-            <span class="icon"></span>Les chiens
-          </a>
-          <a class="sidebar-link" href="#">
-            <span class="icon"></span>Mes réservations
-          </a>
-          <a class="sidebar-link" href="#">
-            <span class="icon"></span>Cours disponibles
-          </a>
-          <div class="sidebar-section-label">Compte</div>
-          <a class="sidebar-link" href="#">
-            <span class="icon"></span>Mon profil
-          </a>
-          <a class="sidebar-link" href="#">
-            <span class="icon"></span> Déconnexion
-          </a>
-        </nav>
-      </aside>
+        {% endfor %}
 
-      <!-- Contenu principal -->
-      <div class="dash-main">
-
-        <!-- Bienvenue -->
-        <div class="dash-welcome">
-          <div>
-            <h2>Bonjour {{ app.user.prenom }} </h2>
-            <p>Vous avez 2 séances cette semaine · Rocky progresse bien !</p>
-          </div>
-          <a href="#catalogue" class="btn btn-amber">Réserver un cours</a>
+        <!-- Ajouter -->
+        <div class="chien-card chien-card-add">
+          <div class="admin-container">
+            <div class="admin-header">
+            <h1>Ajouter un chien</h1>
+            <a href="{{ path('app_chien_liste') }}" class="btn btn-ghost btn-sm">← Retour</a>
         </div>
 
-        <!-- Mes chiens -->
-        <div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem">
-            <h3 style="font-family:var(--display);font-size:1rem;font-weight:500;color:var(--ink)">Mes chiens</h3>
-            <a href="#" class="btn btn-ghost btn-sm">+ Ajouter un chien</a>
-          </div>
-          <div class="chiens-row">
-            <div class="chien-card">
-              <div class="chien-card-top">
-                <div class="chien-icon green">🐕</div>
-                <div>
-                  <div class="chien-name">Rocky</div>
-                  <div class="chien-breed">Berger Australien · 3 ans</div>
-                </div>
-              </div>
-              <div class="chien-stats">
-                <div class="chien-stat">
-                  <div class="chien-stat-val">3</div>
-                  <div class="chien-stat-label">Cours</div>
-                </div>
-                <div class="chien-stat">
-                  <div class="chien-stat-val">80%</div>
-                  <div class="chien-stat-label">Progrès</div>
-                </div>
-                <div class="chien-stat">
-                  <div class="chien-stat-val">2</div>
-                  <div class="chien-stat-label">À venir</div>
-                </div>
-              </div>
-              <div class="chien-card-footer">
-                <a href="#fiche" class="btn btn-outline btn-sm" style="flex:1;justify-content:center">Voir fiche</a>
-                <a href="#catalogue" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Inscrire</a>
-              </div>
-            </div>
+    {{ include('chien/_form.html.twig', {'form': form, 'button_label': 'Ajouter'}) }}
+</div>
 
-            <div class="chien-card">
-              <div class="chien-card-top">
-                <div class="chien-icon amber">🐩</div>
-                <div>
-                  <div class="chien-name">Luna</div>
-                  <div class="chien-breed">Caniche · 1 an</div>
-                </div>
-              </div>
-              <div class="chien-stats">
-                <div class="chien-stat">
-                  <div class="chien-stat-val">1</div>
-                  <div class="chien-stat-label">Cours</div>
-                </div>
-                <div class="chien-stat">
-                  <div class="chien-stat-val">30%</div>
-                  <div class="chien-stat-label">Progrès</div>
-                </div>
-                <div class="chien-stat">
-                  <div class="chien-stat-val">1</div>
-                  <div class="chien-stat-label">À venir</div>
-                </div>
-              </div>
-              <div class="chien-card-footer">
-                <a href="#" class="btn btn-outline btn-sm" style="flex:1;justify-content:center">Voir fiche</a>
-                <a href="#catalogue" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">Inscrire</a>
-              </div>
-            </div>
+      </div>
+    </div>
 
-            <!-- Ajouter -->
-            <div class="chien-card" style="border:2px dashed var(--sand-3);align-items:center;justify-content:center;min-height:180px;cursor:pointer;background:transparent">
-              <div style="text-align:center;color:var(--ink-3)">
-                <div style="font-size:2rem;margin-bottom:0.5rem">＋</div>
-                <div style="font-size:0.85rem;font-weight:500">Ajouter un chien</div>
-              </div>
-            </div>
+    <!-- Prochaines séances -->
+    <div>
+      <div class="sub-header">
+        <h3>Prochaines séances</h3>
+        <a href="#" class="btn btn-ghost btn-sm">Voir tout</a>
+      </div>
+      <div class="seances-list">
+
+        <div class="seance-item">
+          <div class="seance-date">
+            <div class="seance-date-day">12</div>
+            <div class="seance-date-month">Mars</div>
           </div>
+          <div class="seance-info">
+            <div class="seance-title">Agility niveau 1</div>
+            <div class="seance-meta">14h00 – 15h30 · Julien Dupont · Terrain B</div>
+          </div>
+          <div class="seance-chien">🐕 Rocky</div>
+          <span class="tag tag-blue">À venir</span>
         </div>
 
-        <!-- Prochaines séances -->
-        <div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.85rem">
-            <h3 style="font-family:var(--display);font-size:1rem;font-weight:500;color:var(--ink)">Prochaines séances</h3>
-            <a href="#" class="btn btn-ghost btn-sm">Voir tout</a>
+        <div class="seance-item">
+          <div class="seance-date">
+            <div class="seance-date-day">14</div>
+            <div class="seance-date-month">Mars</div>
           </div>
-          <div class="seances-list">
-            <div class="seance-item">
-              <div class="seance-date">
-                <div class="seance-date-day">12</div>
-                <div class="seance-date-month">Mars</div>
-              </div>
-              <div class="seance-info">
-                <div class="seance-title">Agility niveau 1</div>
-                <div class="seance-meta">14h00 – 15h30 · Julien Dupont · Terrain B</div>
-              </div>
-              <div class="seance-chien">🐕 Rocky</div>
-              <span class="tag tag-blue">À venir</span>
-            </div>
-            <div class="seance-item">
-              <div class="seance-date">
-                <div class="seance-date-day">14</div>
-                <div class="seance-date-month">Mars</div>
-              </div>
-              <div class="seance-info">
-                <div class="seance-title">Obéissance débutant</div>
-                <div class="seance-meta">10h00 – 11h00 · Sophie Martin · Salle 1</div>
-              </div>
-              <div class="seance-chien">🐩 Luna</div>
-              <span class="tag tag-blue">À venir</span>
-            </div>
-            <div class="seance-item" style="opacity:0.6">
-              <div class="seance-date" style="background:var(--sand-3)">
-                <div class="seance-date-day" style="color:var(--ink-2)">5</div>
-                <div class="seance-date-month" style="color:var(--ink-3)">Mars</div>
-              </div>
-              <div class="seance-info">
-                <div class="seance-title">Socialisation</div>
-                <div class="seance-meta">17h30 – 19h00 · Emma Petit · Terrain A</div>
-              </div>
-              <div class="seance-chien">🐕 Rocky</div>
-              <span class="tag tag-green">Terminé</span>
-            </div>
+          <div class="seance-info">
+            <div class="seance-title">Obéissance débutant</div>
+            <div class="seance-meta">10h00 – 11h00 · Sophie Martin · Salle 1</div>
           </div>
+          <div class="seance-chien">🐩 Luna</div>
+          <span class="tag tag-blue">À venir</span>
+        </div>
+
+        <div class="seance-item past">
+          <div class="seance-date past">
+            <div class="seance-date-day">5</div>
+            <div class="seance-date-month">Mars</div>
+          </div>
+          <div class="seance-info">
+            <div class="seance-title">Socialisation</div>
+            <div class="seance-meta">17h30 – 19h00 · Emma Petit · Terrain A</div>
+          </div>
+          <div class="seance-chien">🐕 Rocky</div>
+          <span class="tag tag-green">Terminé</span>
         </div>
 
       </div>
     </div>
+
   </div>
+</div>
+
 </section>
 
 <!-- ══════════════════════════════════════

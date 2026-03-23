@@ -26,7 +26,7 @@
 <div class="admin-container">
     <h1> Modifier Chien</h1>
 
-    {{ include('chien/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    {{ include('chien/_form.html.twig', {'form': form, 'button_label': 'Mettre à jour'}) }}
 
        <a href="{{ path('app_chien_liste') }}" class="btn btn-ghost btn-sm">← Retour</a>
 
