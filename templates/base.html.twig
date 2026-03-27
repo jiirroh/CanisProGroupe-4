@@ -31,6 +31,11 @@
             </div>
         </div>
     </nav>
+    <div class="page-nav">
+        <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">Accueil</a>
+        <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_cours' ? 'active' : '' }}" href="{{ path('app_cours') }}">Cours</a>
+        <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_chien_dashboard' ? 'active' : '' }}" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+    </div>
         {% block body %}{% endblock %}
     </body>
 </html>
