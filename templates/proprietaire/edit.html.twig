@@ -1,28 +1,11 @@
 {% extends 'base.html.twig' %}
 
-
 {% block title %}Modifier Proprietaire{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 {% endblock %}
 
 {% block body %}
-
-<nav>
-<div class="nav-container">
-  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
- {% if app.user %}
-    {# L'utilisateur est connecté, on affiche le bouton de déconnexion #}
-    <a href="{{ path('app_logout') }}">Déconnexion</a>
-{% else %}
-    {# L'utilisateur n'est pas connecté, on affiche le bouton de connexion #}
-    <a href="{{ path('app_login') }}">Connexion</a>
-    
-    {# Tu peux aussi ajouter le bouton d'inscription ici si tu en as un #}
-    <a href="{{ path('app_register') }}">S'inscrire</a> 
-{% endif %}
-</div>
-</nav>
 
 <div class="page-nav">
   <a class="page-nav-link" href="{{ path('app_home') }}">Accueil</a>

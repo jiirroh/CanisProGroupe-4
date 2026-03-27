@@ -1,18 +1,3 @@
-<nav>
-<div class="nav-container">
-  <img src="{{ asset('images/logo-canispro.png') }}" width="170px">
- {% if app.user %}
-    {# L'utilisateur est connecté, on affiche le bouton de déconnexion #}
-    <a href="{{ path('app_logout') }}">Déconnexion</a>
-{% else %}
-    {# L'utilisateur n'est pas connecté, on affiche le bouton de connexion #}
-    <a href="{{ path('app_login') }}">Connexion</a>
-    
-    {# Tu peux aussi ajouter le bouton d'inscription ici si tu en as un #}
-    <a href="{{ path('app_register') }}">S'inscrire</a> 
-{% endif %}
-</div>
-</nav>
 <form method="post" action="{{ path('app_proprietaire_delete', {'id': proprietaire.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ proprietaire.id) }}">
     <button class="btn">Delete</button>
