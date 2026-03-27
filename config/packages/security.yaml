@@ -40,14 +40,15 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        - { path: ^/chien/dashboard_admin, roles: ROLE_ADMIN }
-        - { path: ^/chien/_delete_form, roles: ROLE_ADMIN }
-        - { path: ^/chien/chien_ajouter, roles: ROLE_ADMIN }
-        - { path: ^/chien/edit, roles: ROLE_ADMIN }
-        - { path: ^/chien/_form, roles: ROLE_ADMIN }
-        - { path: ^/chien/index, roles: ROLE_ADMIN }
-        - { path: ^/chien/liste, roles: ROLE_ADMIN }
-        - { path: ^/chien/show, roles: ROLE_ADMIN }
+        - { path: ^/chien/dashboard, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/chien/ajouter, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/chien/modifier, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/chien/liste, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/proprietaire, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/inscription, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/cours/nouveau, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/cours/modifier, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/cours/supprimer, roles: IS_AUTHENTICATED_FULLY }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

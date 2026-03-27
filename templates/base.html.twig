@@ -18,6 +18,11 @@
         <div class="nav-right">
             <div class="nav-links">
                 {% if app.user %}
+                    <div class="nav-user">
+                        <div class="nav-avatar">{{ app.user.prenom|first|upper }}{{ app.user.nom|first|upper }}</div>
+                        {{ app.user.prenom }} {{ app.user.nom }}
+                    </div>
+                    <a href="{{ path('app_chien_dashboard') }}">Espace propriétaire</a>
                     <a href="{{ path('app_logout') }}">Déconnexion</a>
                 {% else %}
                     <a href="{{ path('app_login') }}">Connexion</a>
