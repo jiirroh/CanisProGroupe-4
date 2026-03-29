@@ -34,7 +34,15 @@
     <div class="page-nav">
         <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">Accueil</a>
         <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_cours' ? 'active' : '' }}" href="{{ path('app_cours') }}">Cours</a>
-        <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_chien_dashboard' ? 'active' : '' }}" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+        {% if is_granted('ROLE_USER') %}
+            <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_chien_dashboard' ? 'active' : '' }}" href="{{ path('app_chien_dashboard') }}">Dashboard</a>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_cours_index' ? 'active' : '' }}" href="{{ path('app_cours_index') }}">Gérer les cours</a>
+            <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_chien_liste' ? 'active' : '' }}" href="{{path('app_chien_liste')}}">Gérer les chiens</a>
+            <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_inscription_index' ? 'active' : '' }}" href="{{ path('app_inscription_index') }}">Gérer les réservations</a>
+            <a class="page-nav-link {{ app.request.attributes.get('_route') == 'app_proprietaire_index' ? 'active' : '' }}" href="{{ path('app_proprietaire_index') }}">Gérer les propriétaires</a>
+        {% endif %}
     </div>
         {% block body %}{% endblock %}
     </body>

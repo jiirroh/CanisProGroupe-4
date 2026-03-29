@@ -14,20 +14,29 @@ class InscriptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $user = $options['user'];
         $builder
             ->add('cours', EntityType::class, [
                 'class' => Cours::class,
-                'choice_label' => 'libelle', // Affiche le nom du cours dans le formulaire
+                'choice_label' => 'libelle',
             ])
-          ->add('chien', EntityType::class, [
-    'class' => Chien::class,
-    // On personnalise ce qui est affiché dans la liste
-    'choice_label' => function (Chien $chien) {
-        $proprio = $chien->getProprietaire();
-        return $chien->getNom() . ' (Propriétaire : ' . $proprio->getPrenom() . ' ' . $proprio->getNom() . ')';
-    },
-    'label' => 'Choisir le chien',
-])
+            ->add('chien', EntityType::class, [
+                'class' => Chien::class,
+                'query_builder' => function ($er) use ($user) {
+                    if ($user && in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+                        return $er->createQueryBuilder('c');
+                    }
+                    if (!$user || !$user->getProprietaire()) {
+                        return $er->createQueryBuilder('c')->where('1=0');
+                    }
+                    return $er->createQueryBuilder('c')
+                        ->join('c.proprietaire', 'p')
+                        ->where('p.id = :proprietaireId')
+                        ->setParameter('proprietaireId', $user->getProprietaire()->getId());
+                },
+                'choice_label' => 'nom',
+                'label' => 'Choisir le chien',
+            ])
         ;
     }
 
@@ -35,6 +44,7 @@ class InscriptionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Inscription::class,
+            'user' => null,
         ]);
     }
 }

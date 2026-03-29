@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Proprietaire;
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -24,6 +25,9 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     private ?string $prenom = null;
+
+    #[ORM\OneToOne(targetEntity: Proprietaire::class, cascade: ['persist', 'remove'])]
+    private ?Proprietaire $proprietaire = null;
 
     /**
      * @var list<string> The user roles
@@ -129,5 +133,17 @@ public function getNom(): ?string
         $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
 
         return $data;
+    }
+
+    public function getProprietaire(): ?Proprietaire
+    {
+        return $this->proprietaire;
+    }
+
+    public function setProprietaire(?Proprietaire $proprietaire): static
+    {
+        $this->proprietaire = $proprietaire;
+
+        return $this;
     }
 }

@@ -43,11 +43,14 @@ security:
         - { path: ^/chien/dashboard, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/chien/ajouter, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/chien/modifier, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/chien/liste, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/proprietaire, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/inscription, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/cours/nouveau, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/cours/modifier, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/chien/liste, roles: ROLE_ADMIN }
+        - { path: ^/proprietaire, roles: ROLE_ADMIN }
+        - { path: ^/inscription/new, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/inscription$, roles: ROLE_ADMIN }
+        - { path: ^/inscription/\d+, roles: ROLE_ADMIN }
+        - { path: ^/cours/admin, roles: ROLE_ADMIN }
+        - { path: ^/cours/nouveau, roles: ROLE_ADMIN }
+        - { path: ^/cours/modifier, roles: ROLE_ADMIN }
         - { path: ^/cours/supprimer, roles: IS_AUTHENTICATED_FULLY }
         # - { path: ^/profile, roles: ROLE_USER }
 

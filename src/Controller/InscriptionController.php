@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Inscription;
 use App\Form\InscriptionType;
+use App\Repository\ChienRepository;
 use App\Repository\InscriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,16 +24,22 @@ final class InscriptionController extends AbstractController
     }
 
     #[Route('/new', name: 'app_inscription_new', methods: ['GET', 'POST'])]
-public function new(Request $request, EntityManagerInterface $entityManager): Response
+public function new(Request $request, EntityManagerInterface $entityManager, \App\Repository\ChienRepository $chienRepository): Response
 {
     $inscription = new Inscription();
     
-    // --- AJOUTS ICI ---
-    $inscription->setDateInscrit(new \DateTime()); // On fixe la date à "maintenant"
-    $inscription->setStatut('En attente');         // On met un statut par défaut
-    // ------------------
+    $inscription->setDateInscrit(new \DateTime());
+    $inscription->setStatut('En attente');
 
-    $form = $this->createForm(InscriptionType::class, $inscription);
+    $selectedChienId = $request->query->getInt('chien');
+    if ($selectedChienId > 0) {
+        $selectedChien = $chienRepository->find($selectedChienId);
+        if ($selectedChien) {
+            $inscription->setChien($selectedChien);
+        }
+    }
+
+    $form = $this->createForm(InscriptionType::class, $inscription, ['user' => $this->getUser()]);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {

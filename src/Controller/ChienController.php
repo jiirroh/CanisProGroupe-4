@@ -25,19 +25,29 @@ final class ChienController extends AbstractController
     #[Route('/dashboard', name: 'app_chien_dashboard', methods: ['GET', 'POST'])]
 public function dashboard(ChienRepository $chienRepository, Request $request, EntityManagerInterface $entityManager): Response
 {
+    $user = $this->getUser();
+    $isAdmin = $this->isGranted('ROLE_ADMIN');
+    $chiens = $isAdmin ? $chienRepository->findAll() : ($user && $user->getProprietaire() ? $chienRepository->findBy(['proprietaire' => $user->getProprietaire()]) : []);
+
     $chien = new Chien();
     $form = $this->createForm(ChienType::class, $chien);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
+        if (!$isAdmin && $user && $user->getProprietaire()) {
+            $chien->setProprietaire($user->getProprietaire());
+        }
+
         $entityManager->persist($chien);
         $entityManager->flush();
-        return $this->redirectToRoute('app_chien_liste');
+
+        return $this->redirectToRoute('app_chien_dashboard');
     }
 
     return $this->render('chien/dashboard_admin.html.twig', [
-        'chiens' => $chienRepository->findAll(),
+        'chiens' => $chiens,
         'form'   => $form->createView(),
+        'isAdmin' => $isAdmin,
     ]);
 }
 
