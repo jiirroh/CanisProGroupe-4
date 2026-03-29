@@ -31,6 +31,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\OneToOne(targetEntity: Proprietaire::class, cascade: ['persist', 'remove'])]
+    private ?Proprietaire $proprietaire = null;
+
     /**
      * @var string The hashed password
      */
@@ -117,6 +120,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getProprietaire(): ?Proprietaire
+    {
+        return $this->proprietaire;
+    }
+
+    public function setProprietaire(?Proprietaire $proprietaire): static
+    {
+        $this->proprietaire = $proprietaire;
 
         return $this;
     }
