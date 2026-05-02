@@ -22,8 +22,8 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        // On vérifie si le formulaire a été soumis (bouton cliqué)
-        if ($form->isSubmitted()) {
+        // On vérifie si le formulaire a été soumis (bouton cliqué) et valide
+        if ($form->isSubmitted() && $form->isValid()) {
             
 
             /** @var string $plainPassword */

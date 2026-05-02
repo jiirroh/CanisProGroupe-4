@@ -37,6 +37,9 @@
                         <td class="age-text">{{ chien.age }} ans</td>
                         <td class="td-proprietaire">{{ chien.proprietaire ? chien.proprietaire.nom : 'Aucun' }}</td>
                         <td class="td-actions">
+                            <a href="{{ path('app_chien_show', {'id': chien.id}) }}" class="btn" style="background: var(--blue-5); color: white; padding: 0.5rem 1rem; font-size: 0.8rem; margin-right: 0.5rem;">
+                                Voir
+                            </a>
                             <a href="{{ path('chien_modification', {'id': chien.id}) }}" class="btn" style="background: var(--forest-3); color: white; padding: 0.5rem 1rem; font-size: 0.8rem;">
                                 Modifier
                             </a>

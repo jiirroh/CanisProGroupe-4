@@ -1,34 +1,105 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Chien{% endblock %}
+{% block title %}Profil de {{ chien.nom }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Chien</h1>
+<section class="profil-section" id="profil">
+  <div class="section-inner">
+    <p class="section-label">Fiche chien</p>
+    <h2 class="section-title">Profil de <em>{{ chien.nom }}</em></h2>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ chien.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ chien.nom }}</td>
-            </tr>
-            <tr>
-                <th>Race</th>
-                <td>{{ chien.race }}</td>
-            </tr>
-            <tr>
-                <th>Age</th>
-                <td>{{ chien.age }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="profil-grid">
 
-    <a href="{{ path('app_chien_index') }}">back to list</a>
+      <!-- Carte gauche -->
+      <div class="profil-card">
+        <div class="profil-card-top">
+          <span class="profil-animal-icon">🐕</span>
+          <div class="profil-card-name">{{ chien.nom }}</div>
+          <div class="profil-card-breed">{{ chien.race }} • {{ chien.age }} ans</div>
+        </div>
+        <div class="profil-card-body">
+          <div class="profil-info-row">
+            <span class="profil-info-label">Race</span>
+            <span class="profil-info-value">{{ chien.race }}</span>
+          </div>
+          <div class="profil-info-row">
+            <span class="profil-info-label">Âge</span>
+            <span class="profil-info-value">{{ chien.age }} ans</span>
+          </div>
+          <div class="profil-info-row">
+            <span class="profil-info-label">Propriétaire</span>
+            <span class="profil-info-value">{{ chien.proprietaire ? chien.proprietaire.prenom ~ ' ' ~ chien.proprietaire.nom : 'Aucun' }}</span>
+          </div>
+        </div>
+      </div>
 
-    <a href="{{ path('app_chien_edit', {'id': chien.id}) }}">edit</a>
+      <!-- Contenu droite -->
+      <div class="profil-right">
 
-    {{ include('chien/_delete_form.html.twig') }}
+        <!-- Historique cours -->
+        <div class="profil-section-card">
+          <div class="profil-section-title">📚 Cours suivis</div>
+          <div class="cours-historique">
+            {% for inscription in chien.inscriptions %}
+            <div class="cours-hist-item">
+              <div>
+                <div class="cours-hist-name">{{ inscription.cours.libelle }}</div>
+                <div class="cours-hist-date">{{ inscription.cours.dateHeure ? inscription.cours.dateHeure|date('d/m/Y H:i') : '' }}</div>
+              </div>
+              {% if inscription.cours.dateHeure and inscription.cours.dateHeure < date() %}
+                <span class="tag tag-green">Terminé</span>
+              {% else %}
+                <span class="tag tag-blue">À venir</span>
+              {% endif %}
+            </div>
+            {% else %}
+            <p style="color: var(--ink-3);">Ce chien n'est inscrit à aucun cours pour le moment.</p>
+            {% endfor %}
+          </div>
+        </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
+        <!-- Propriétaire -->
+        <div class="profil-section-card">
+          <div class="profil-section-title">👤 Propriétaire</div>
+          {% if chien.proprietaire %}
+          <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+            <div class="avatar" style="width:48px;height:48px;font-size:1.2rem">{{ chien.proprietaire.prenom|first|upper }}{{ chien.proprietaire.nom|first|upper }}</div>
+            <div>
+              <div style="font-weight:500;color:var(--ink)">{{ chien.proprietaire.prenom }} {{ chien.proprietaire.nom }}</div>
+              <div style="font-size:0.78rem;color:var(--ink-3)">Client CanisPro</div>
+            </div>
+          </div>
+          {% else %}
+            <p>Ce chien n'a pas de propriétaire assigné.</p>
+          {% endif %}
+          <div style="display:flex;gap:0.5rem">
+            <a href="{{ path('chien_modification', {'id': chien.id}) }}" class="btn-sm">Modifier le chien</a>
+          </div>
+        </div>
+        {% else %}
+        <div class="profil-section-card">
+          <div class="profil-section-title">⚙️ Actions</div>
+          <div style="display:flex;gap:0.5rem">
+            <a href="{{ path('app_inscription_new', {'chien': chien.id}) }}" class="btn-sm">Inscrire à un cours</a>
+            <a href="{{ path('chien_modification', {'id': chien.id}) }}" class="btn-sm ghost">Modifier la fiche</a>
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+    
+    <div style="margin-top: 2rem; text-align: center;">
+        <a href="{{ path('app_chien_dashboard') }}" class="btn btn-ghost">← Retour au dashboard</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>CanisPro</strong> — Maquette Symfony · Fiche Chien · 2026
+</footer>
 {% endblock %}

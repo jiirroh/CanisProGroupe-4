@@ -15,11 +15,9 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ChienController extends AbstractController
 {
     #[Route('/', name: 'app_chien_index', methods: ['GET'])]
-    public function index(ChienRepository $chienRepository): Response
+    public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'chiens' => $chienRepository->findAll(),
-        ]);
+        return $this->redirectToRoute('app_chien_dashboard');
     }
 
     #[Route('/dashboard', name: 'app_chien_dashboard', methods: ['GET', 'POST'])]
@@ -61,6 +59,14 @@ final class ChienController extends AbstractController
             'chiens' => $chiens,
             'form'   => $form->createView(),
             'isAdmin' => $isAdmin,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_chien_show', methods: ['GET'], requirements: ['id' => '\d+'])]
+    public function show(Chien $chien): Response
+    {
+        return $this->render('chien/show.html.twig', [
+            'chien' => $chien,
         ]);
     }
 

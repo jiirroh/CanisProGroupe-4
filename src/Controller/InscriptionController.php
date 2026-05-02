@@ -66,7 +66,7 @@ public function new(Request $request, EntityManagerInterface $entityManager, \Ap
     #[Route('/{id}/edit', name: 'app_inscription_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Inscription $inscription, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(InscriptionType::class, $inscription);
+        $form = $this->createForm(InscriptionType::class, $inscription, ['user' => $this->getUser()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
